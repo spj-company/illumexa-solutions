@@ -220,8 +220,8 @@
   inset: 0;
   background-image: radial-gradient(circle, var(--bp-dots) 0.9px, transparent 1.4px);
   background-size: 6px 6px;
-  -webkit-mask: url("../../assets/images/world-map.svg") center / 100% 100% no-repeat;
-  mask: url("../../assets/images/world-map.svg") center / 100% 100% no-repeat;
+  -webkit-mask: url("../assets/images/world-map.svg") center / 100% 100% no-repeat;
+  mask: url("../assets/images/world-map.svg") center / 100% 100% no-repeat;
   pointer-events: none;
 }
 
