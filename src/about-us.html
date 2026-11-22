@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | Illumexa Solutions</title>
+  <meta name="description" content="Illumexa Solutions is a founder-focused investment and business growth firm headquartered in Kochi, India, backing entrepreneurs with capital, strategy and global market access.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Cg transform='rotate(32 16 16)'%3E%3Crect x='12' y='4' width='8' height='12' rx='4' fill='%23cdf200'/%3E%3Crect x='14' y='16' width='8' height='12' rx='4' fill='%23cdf200'/%3E%3C/g%3E%3C/svg%3E">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Illumexa Solutions">
+  <meta property="og:title" content="About Us | Illumexa Solutions">
+  <meta property="og:description" content="Where innovative ideas find the right partner.">
+  <meta property="og:image" content="../assets/images/about-hero.jpg">
+
+  <link rel="preload" href="../assets/images/about-hero.jpg" as="image" fetchpriority="high"
+        imagesrcset="../assets/images/about-hero-800.jpg 800w, ../assets/images/about-hero.jpg 1600w" imagesizes="(max-width: 767px) 100vw, 88vw">
+  <link rel="preload" href="../assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/images/logo/illumexa-mark.png" as="image" fetchpriority="high">
+
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/about.css">
+  <link rel="stylesheet" href="styles/geo-blueprint.css">
+
+  <script>
+    // Gate the reveal styles on JS (dropped again if the scripts never run), and open the
+    // page with the intro on the first page of a visit, or a short veil after that.
+    (function (root) {
+      root.classList.add('js');
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add(sessionStorage.getItem('illumexa-visited') ? 'is-arriving' : 'is-intro');
+          sessionStorage.setItem('illumexa-visited', '1');
+        }
+      } catch (error) {}
+      setTimeout(function () {
+        if (!window.illumexaReady) root.classList.remove('js');
+      }, 3000);
+    })(document.documentElement);
+  </script>
+  <script src="scripts/main.js" defer></script>
+  <script src="scripts/geo-blueprint.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite (kept renderable, not display:none, so gradients resolve). -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="grad-map-pin" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#C8F000"/>
+        <stop offset="1" stop-color="#7FB000"/>
+      </linearGradient>
+      <linearGradient id="grad-tag" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#EDFF8A"/>
+        <stop offset="1" stop-color="#B8DC1E"/>
+      </linearGradient>
+    </defs>
+
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>
+    </symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12h15M13 6l6 6-6 6"/>
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/>
+    </symbol>
+    <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/>
+    </symbol>
+    <symbol id="i-tag" viewBox="0 0 48 34">
+      <path d="M3 5a4 4 0 0 1 4-4h26l13 16-13 16H7a4 4 0 0 1-4-4Z" fill="url(#grad-tag)"/>
+      <circle cx="33.5" cy="17" r="3.4" fill="#3d4a00"/>
+    </symbol>
+    <symbol id="map-pin" viewBox="0 0 40 52">
+      <path d="M20 1.5C9.8 1.5 1.5 9.6 1.5 19.7 1.5 33.2 20 50.5 20 50.5S38.5 33.2 38.5 19.7C38.5 9.6 30.2 1.5 20 1.5Z" fill="url(#grad-map-pin)"/>
+      <circle cx="20" cy="19" r="7.6" fill="#fff"/>
+    </symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" data-header data-motion>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Illumexa Solutions — home">
+        <img class="brand__mark" src="../assets/images/logo/illumexa-mark.png" alt="" width="127" height="176" decoding="async">
+        <span class="brand__word" aria-hidden="true">
+          <span class="brand__name">illumexa</span>
+          <span class="brand__sub">SOLUTIONS</span>
+        </span>
+      </a>
+
+      <div class="site-nav__menu" id="site-menu" data-menu>
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="about-us.html" aria-current="page">About us</a></li>
+          <li><a class="nav-link" href="services.html">Services</a></li>
+          <li><a class="nav-link" href="#" data-page="investment-models">Investment models</a></li>
+          <li><a class="nav-link" href="#" data-page="portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="contact.html">Contact us</a></li>
+          <li class="nav-list__cta"><a class="btn btn--lime btn--sm" href="contact.html">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </div>
+
+      <div class="site-nav__actions">
+        <button class="nav-search" type="button" aria-label="Search" aria-haspopup="dialog" aria-controls="site-search" data-search-open>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+          <span class="nav-search__label" aria-hidden="true">Search</span>
+        </button>
+        <a class="btn btn--lime btn--sm site-nav__pitch" href="contact.html">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-menu-toggle>
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="about-hero" aria-labelledby="about-title" data-parallax-scope data-ambient>
+      <!-- The photo sits in its own layer so a slow camera drift and the scroll depth can combine. -->
+      <div class="about-hero__media" aria-hidden="true">
+        <img class="about-hero__photo" src="../assets/images/about-hero.jpg"
+             srcset="../assets/images/about-hero-800.jpg 800w, ../assets/images/about-hero.jpg 1600w"
+             sizes="(max-width: 767px) 100vw, 88vw" alt="" width="1600" height="997" fetchpriority="high">
+      </div>
+      <!-- Atmosphere: drifting light and a slow glint across the window glass. -->
+      <div class="about-hero__atmos" aria-hidden="true"></div>
+      <div class="about-hero__glint" aria-hidden="true"></div>
+      <!-- Glowing network over the window: decorative. -->
+      <svg class="about-hero__network" viewBox="0 0 1440 786" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false" data-draw>
+        <defs>
+          <filter id="net-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+        <g fill="none" stroke="#d6ff2e" stroke-linecap="round">
+          <g stroke-width="5" opacity=".45" filter="url(#net-glow)">
+            <path d="M905 150Q1020 60 1135 145"/><path d="M905 150Q1070 40 1230 175"/><path d="M1135 145Q1225 110 1300 262"/>
+            <path d="M930 240Q1030 160 1135 145"/><path d="M930 240Q1140 150 1300 262"/><path d="M1030 300Q1160 210 1300 262"/>
+          </g>
+          <g stroke-width="1.6" opacity=".9">
+            <path d="M905 150Q1020 60 1135 145"/><path d="M905 150Q1070 40 1230 175"/><path d="M1135 145Q1225 110 1300 262"/>
+            <path d="M930 240Q1030 160 1135 145"/><path d="M930 240Q1140 150 1300 262"/><path d="M1030 300Q1160 210 1300 262"/>
+          </g>
+        </g>
+        <g fill="#efff9a">
+          <circle cx="905" cy="150" r="5"/><circle cx="1135" cy="145" r="5"/><circle cx="1230" cy="175" r="4"/>
+          <circle cx="1300" cy="262" r="5"/><circle cx="930" cy="240" r="4"/><circle cx="1030" cy="300" r="4"/>
+        </g>
+      </svg>
+      <!-- Light pulses riding the network's arcs (kept apart from the glowing arcs so they
+           repaint on their own). -->
+      <svg class="about-hero__pulses" viewBox="0 0 1440 786" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+        <path d="M905 150Q1020 60 1135 145" pathLength="1"/><path d="M905 150Q1070 40 1230 175" pathLength="1"/><path d="M1135 145Q1225 110 1300 262" pathLength="1"/>
+        <path d="M930 240Q1030 160 1135 145" pathLength="1"/><path d="M930 240Q1140 150 1300 262" pathLength="1"/><path d="M1030 300Q1160 210 1300 262" pathLength="1"/>
+      </svg>
+      <div class="about-hero__particles" aria-hidden="true">
+        <span style="--x:62%;--y:30%;--d:11s;--delay:-2s;--dx:10px;--o:.7"></span>
+        <span style="--x:70%;--y:55%;--s:3px;--d:13s;--delay:-6s;--dx:-8px;--o:.6"></span>
+        <span style="--x:78%;--y:22%;--d:10s;--delay:-4s;--dx:6px;--o:.8"></span>
+        <span style="--x:86%;--y:48%;--d:12s;--delay:-9s;--dx:-12px;--o:.6"></span>
+        <span style="--x:28%;--y:72%;--d:12s;--delay:-2s;--dx:10px;--o:.6"></span>
+        <span style="--x:46%;--y:60%;--d:10s;--delay:-4s;--dx:-9px;--o:.6"></span>
+        <span style="--x:92%;--y:35%;--s:3px;--d:14s;--delay:-1s;--dx:8px;--o:.5"></span>
+        <span style="--x:55%;--y:70%;--d:11s;--delay:-7s;--dx:12px;--o:.6"></span>
+        <span style="--x:66%;--y:80%;--d:12s;--delay:-3s;--dx:-6px;--o:.5"></span>
+        <span style="--x:74%;--y:64%;--d:10s;--delay:-8s;--dx:9px;--o:.7"></span>
+        <span style="--x:82%;--y:75%;--s:3px;--d:15s;--delay:-5s;--dx:-10px;--o:.5"></span>
+        <span style="--x:90%;--y:62%;--d:11s;--delay:-10s;--dx:7px;--o:.6"></span>
+        <span style="--x:18%;--y:66%;--d:13s;--delay:-9s;--dx:-8px;--o:.5"></span>
+        <span style="--x:38%;--y:82%;--s:3px;--d:14s;--delay:-6s;--dx:6px;--o:.5"></span>
+      </div>
+      <!-- The lime ribbon; a band of light flows along its own strands (the image is the mask). -->
+      <div class="about-hero__wave" aria-hidden="true">
+        <img src="../assets/images/light-wave.svg" alt="" width="760" height="260">
+        <span class="about-hero__trail"><span></span></span>
+      </div>
+
+      <div class="container about-hero__content hero-exit">
+        <p class="about-hero__label char-reveal">About Us</p>
+        <h1 class="about-hero__title word-reveal" id="about-title">Where <span class="text-lime">Innovative Ideas</span><br> Find the <span class="text-lime">Right Partner</span></h1>
+        <p class="about-hero__caption wipe-reveal">Our core philosophy</p>
+      </div>
+    </section>
+
+    <!-- ============ INTRO ============ -->
+    <section class="about-intro" aria-label="Who we are" data-ambient data-seam>
+      <div class="container about-intro__grid">
+        <div class="about-intro__text" data-stagger>
+          <p class="text-reveal">Illumexa Solutions is a founder-focused investment and business growth firm headquartered in Kochi, India. We partner with ambitious entrepreneurs from the earliest stages, helping transform innovative ideas into successful and sustainable businesses.</p>
+          <p class="text-reveal">We believe that building a successful company requires more than funding. It requires the right strategy, strong execution, access to opportunities, and a trusted partner committed to the journey. That is why we invest ₹10 Lakhs to ₹1 Crore while providing the guidance, resources, and business support founders need to build, launch, and scale with confidence.</p>
+          <p class="text-reveal">At Illumexa Solutions, we do not simply invest in businesses – we build lasting partnerships with founders. We provide the capital, expertise, and ecosystem they need to turn promising ideas into thriving enterprises.</p>
+        </div>
+        <figure class="about-intro__media image-reveal">
+          <img src="../assets/images/ideas-keys.svg" alt="Keyboard keys spelling “Turn your ideas into impacts” around a glowing lime key" width="560" height="450" loading="lazy" decoding="async">
+          <figcaption class="about-intro__caption">Venture Hub V.04</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ OUR STORY ============ -->
+    <section class="about-story" id="our-story" aria-labelledby="story-title" data-ambient data-seam>
+      <div class="container about-story__grid">
+        <figure class="about-story__visual image-reveal">
+          <figcaption class="about-story__place">Illumexa HQ — Kochi</figcaption>
+        </figure>
+        <div class="about-story__content" data-stagger>
+          <p class="pill" aria-hidden="true" data-reveal>Our Story</p>
+          <h2 class="about-story__title word-reveal" id="story-title">Partners First<br> Investors Second</h2>
+          <article class="story-card fx-card fx-sheen reveal-right">
+            <h3 class="story-card__title">Founded on Experience</h3>
+            <p>Illumexa was born from a straightforward observation: talented founders across India, particularly outside the metros, have viable businesses but lack access to patient capital, international networks, and experienced guidance. We exist to close that gap.</p>
+          </article>
+          <article class="story-card fx-card fx-sheen reveal-right">
+            <h3 class="story-card__title">Grounded in Kochi, Connected Globally</h3>
+            <p>Headquartered in Kerala's commercial capital, we've built market networks across India, the United States, and Europe. Our portfolio ranges from a premium dessert franchise in Kochi to a BIM services company at Infopark expanding into the US market — funded through equity and profit-sharing models, never loans.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PHILOSOPHY ============ -->
+    <section class="about-philosophy" id="philosophy" aria-labelledby="philosophy-title" data-parallax-scope data-seam>
+      <div class="container container--wide" data-stagger>
+        <h2 class="about-philosophy__title word-reveal scroll-grow" id="philosophy-title">Our <span class="text-lime text-lime--on-light">Investment Philosophy</span></h2>
+        <div class="about-philosophy__text" data-stagger>
+          <p class="text-reveal">At Illumexa Solutions, we believe the strongest businesses are built on substance rather than speculation. We look beyond ideas alone to understand the problems being solved, the markets being served and the potential to create meaningful and lasting value.</p>
+          <p class="text-reveal">We evaluate opportunities based on the strength and commitment of the founding team, the depth of the market opportunity, the potential for sustainable growth and the ability to execute with resilience and discipline. We believe in substance over hype, real market potential over speculation and execution over pitch decks.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PILLARS ============ -->
+    <section class="about-pillars" aria-label="What we stand for" data-search-type="Philosophy" data-ambient data-observe data-parallax-scope data-seam>
+      <div class="about-pillars__glow" aria-hidden="true"></div>
+      <div class="about-pillars__inner" data-stagger>
+        <article class="pillar reveal-up">
+          <h3 class="pillar__title word-reveal">Building Businesses That Matter</h3>
+          <div class="pillar__card fx-card">
+            <p>We partner with founders who are solving tangible problems for identifiable customers and building businesses with genuine market potential. We are sector agnostic and open to opportunities across industries where there is a clear opportunity to create meaningful and sustainable impact.</p>
+            <svg class="pillar__tag" aria-hidden="true" focusable="false"><use href="#i-tag"/></svg>
+          </div>
+        </article>
+        <article class="pillar reveal-up">
+          <h3 class="pillar__title word-reveal">Capital With Commitment</h3>
+          <div class="pillar__card fx-card">
+            <p>We believe founders deserve a partner, not just a financier. Our approach is built on long term alignment, with investment structures designed to support the vision, ownership and interests of the people building the business.</p>
+            <p>We value resilience, adaptability, disciplined execution and the willingness to evolve because great businesses are built over time.</p>
+            <svg class="pillar__tag" aria-hidden="true" focusable="false"><use href="#i-tag"/></svg>
+          </div>
+        </article>
+        <article class="pillar reveal-up">
+          <h3 class="pillar__title word-reveal">Access to Opportunity</h3>
+          <div class="pillar__card fx-card">
+            <p>Our partnership extends beyond the investment itself. Through our network and ecosystem, we help connect founders to opportunities across India, the United States and Europe while providing access to strategic perspectives, relevant expertise and meaningful relationships that can support their growth. Ultimately, we invest in potential but we partner with conviction. Our philosophy is simple. Back exceptional founders, support meaningful businesses and help build companies designed to create lasting value.</p>
+            <svg class="pillar__tag" aria-hidden="true" focusable="false"><use href="#i-tag"/></svg>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ BOARD ============ -->
+    <section class="about-board" id="board" aria-labelledby="board-title" data-parallax-scope data-seam>
+      <div class="container" data-stagger>
+        <p class="pill" aria-hidden="true" data-reveal>Governance</p>
+        <h2 class="about-board__title word-reveal scroll-grow" id="board-title">Board of <span class="text-lime text-lime--on-light">Directors</span></h2>
+        <p class="about-board__intro text-reveal">Seasoned professionals who bring decades of experience in venture capital, corporate strategy, and international business to guide Illumexa's vision and investment decisions.</p>
+      </div>
+
+      <!-- Board members. Cards 2–4 repeat the design's placeholder profile until real details are supplied. -->
+      <ul class="board-grid" role="list" data-stagger data-search-type="Board">
+        <li class="card-reveal">
+          <article class="director fx-card fx-sheen reveal-group" data-tilt>
+            <div class="director__photo image-reveal" aria-hidden="true"></div>
+            <p class="director__role reveal-item">Chairman &amp; Founder</p>
+            <h3 class="director__name reveal-item">SREERAG</h3>
+            <p class="director__bio reveal-item">A serial entrepreneur with over 15 years of experience building and scaling businesses across technology, services, and franchise sectors. Founded Illumexa Solutions with the conviction that early-stage companies deserve more than just capital — they deserve a committed partner. Oversees the firm's investment strategy and portfolio direction.</p>
+          </article>
+        </li>
+        <li class="card-reveal">
+          <article class="director fx-card fx-sheen reveal-group" data-tilt>
+            <div class="director__photo image-reveal" aria-hidden="true"></div>
+            <p class="director__role reveal-item">Chairman &amp; Founder</p>
+            <h3 class="director__name reveal-item">SREERAG</h3>
+            <p class="director__bio reveal-item">A serial entrepreneur with over 15 years of experience building and scaling businesses across technology, services, and franchise sectors. Founded Illumexa Solutions with the conviction that early-stage companies deserve more than just capital — they deserve a committed partner. Oversees the firm's investment strategy and portfolio direction.</p>
+          </article>
+        </li>
+        <li class="card-reveal">
+          <article class="director fx-card fx-sheen reveal-group" data-tilt>
+            <div class="director__photo image-reveal" aria-hidden="true"></div>
+            <p class="director__role reveal-item">Chairman &amp; Founder</p>
+            <h3 class="director__name reveal-item">SREERAG</h3>
+            <p class="director__bio reveal-item">A serial entrepreneur with over 15 years of experience building and scaling businesses across technology, services, and franchise sectors. Founded Illumexa Solutions with the conviction that early-stage companies deserve more than just capital — they deserve a committed partner. Oversees the firm's investment strategy and portfolio direction.</p>
+          </article>
+        </li>
+        <li class="card-reveal">
+          <article class="director fx-card fx-sheen reveal-group" data-tilt>
+            <div class="director__photo image-reveal" aria-hidden="true"></div>
+            <p class="director__role reveal-item">Chairman &amp; Founder</p>
+            <h3 class="director__name reveal-item">SREERAG</h3>
+            <p class="director__bio reveal-item">A serial entrepreneur with over 15 years of experience building and scaling businesses across technology, services, and franchise sectors. Founded Illumexa Solutions with the conviction that early-stage companies deserve more than just capital — they deserve a committed partner. Oversees the firm's investment strategy and portfolio direction.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ REACH ============ -->
+    <section class="about-reach" aria-label="Global reach" data-ambient data-seam>
+      <div class="about-reach__inner">
+        <ul class="reach-stats" role="list" data-reveal>
+          <li class="reach-stat"><span class="reach-stat__value" data-count="2" data-suffix="+">2+</span><span class="reach-stat__label">Countries</span></li>
+          <li class="reach-stat"><span class="reach-stat__value" data-count="4">4</span><span class="reach-stat__label">Major hubs</span></li>
+        </ul>
+        <!-- The global blueprint (geo-blueprint.js / .css, shared with Contact) draws over this
+             map: grid, coastline trace, arcs and measures between the pins, which drop in the
+             order India, Europe, USA once a quarter of the card is in view. -->
+        <div class="world-map about-reach__map scale-reveal geo-blueprint geo-blueprint--overlay" data-geo-blueprint data-ambient data-reveal-threshold="0.25">
+          <div class="world-map__canvas">
+            <img class="world-map__land" src="../assets/images/world-map.svg" alt="World map marking Illumexa's hubs in the USA, Europe and India" width="1440" height="962" loading="lazy" decoding="async">
+            <span class="map-pin map-pin--usa" data-hub="usa" aria-hidden="true"><svg class="map-pin__marker" viewBox="0 0 40 52"><use href="#map-pin"/></svg><span class="map-pin__label">USA</span></span>
+            <span class="map-pin map-pin--europe" data-hub="europe" aria-hidden="true"><svg class="map-pin__marker" viewBox="0 0 40 52"><use href="#map-pin"/></svg><span class="map-pin__label">EUROPE</span></span>
+            <span class="map-pin map-pin--india" data-hub="india" aria-hidden="true"><svg class="map-pin__marker" viewBox="0 0 40 52"><use href="#map-pin"/></svg><span class="map-pin__label">INDIA</span></span>
+          </div>
+          <div class="geo-blueprint__plate" aria-hidden="true">
+            <p class="geo-blueprint__title">Illumexa Global Blueprint</p>
+            <span class="geo-blueprint__rule"></span>
+            <p class="geo-blueprint__meta">Mercator · 3 hubs · Sheet 01</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <!-- data-motion: the ILLUMEXA outline draws itself as the footer scrolls in, a single light
+       passes through it, and the columns, links and rule reveal in sequence. -->
+  <footer class="site-footer" data-observe data-motion>
+    <svg class="site-footer__outline" viewBox="0 0 4606 1000" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="outline-sweep-fill" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".5" stop-color="#fff"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="outline-sweep" maskUnits="userSpaceOnUse" x="0" y="0" width="4606" height="1000">
+          <rect class="site-footer__sweep" x="-1400" y="0" width="1400" height="1000" fill="url(#outline-sweep-fill)"/>
+        </mask>
+      </defs>
+      <text class="site-footer__outline-text" x="2303" y="849" text-anchor="middle">ILLUMEXA</text>
+      <text class="site-footer__outline-text site-footer__outline-text--light" x="2303" y="849" text-anchor="middle" mask="url(#outline-sweep)">ILLUMEXA</text>
+    </svg>
+
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <p class="site-footer__name word-reveal">ILLUMEXA SOLUTIONS</p>
+        <p class="site-footer__about text-reveal">Architecting the future through strategic capital and technical excellence. The blueprint for modern innovation.</p>
+        <div class="site-footer__social reveal-group" data-stagger>
+          <a class="icon-btn reveal-item" href="index.html" aria-label="Illumexa Solutions website">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg>
+          </a>
+          <button class="icon-btn reveal-item" type="button" aria-label="Share this page" data-share>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-share"/></svg>
+          </button>
+          <span class="visually-hidden" aria-live="polite" data-share-status></span>
+        </div>
+      </div>
+
+      <nav class="site-footer__col" aria-labelledby="footer-quick">
+        <h2 class="site-footer__heading char-reveal" id="footer-quick">Quick Links</h2>
+        <ul class="site-footer__links reveal-group" role="list" data-stagger>
+          <li class="reveal-item"><a href="index.html">Home</a></li>
+          <li class="reveal-item"><a href="services.html">Services</a></li>
+          <li class="reveal-item"><a href="about-us.html" aria-current="page">About Us</a></li>
+          <li class="reveal-item"><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-labelledby="footer-legal">
+        <h2 class="site-footer__heading char-reveal" id="footer-legal">Legal</h2>
+        <ul class="site-footer__links reveal-group" role="list" data-stagger>
+          <li class="reveal-item"><a href="#" data-page="privacy">Privacy</a></li>
+          <li class="reveal-item"><a href="#" data-page="terms">Terms</a></li>
+          <li class="reveal-item"><a href="faq.html">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span class="site-footer__rule line-reveal" aria-hidden="true"></span>
+      <div class="container site-footer__bar reveal">
+        <p>© 2026 Illumexa Solutions. The blueprint for innovation.</p>
+        <p class="site-footer__meta"><span>Est. 2026</span><span>Global Ops</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SEARCH ============ -->
+  <dialog class="search" id="site-search" aria-labelledby="search-title" data-search>
+    <h2 class="visually-hidden" id="search-title">Search the site</h2>
+    <form class="search__form" role="search" data-search-form>
+      <img class="search__icon" src="../assets/images/logo/illumexa-mark.png" alt="" width="127" height="176" decoding="async">
+      <label class="visually-hidden" for="search-input">Search services, steps and questions</label>
+      <input class="search__input" id="search-input" type="search" placeholder="Search services, steps, FAQs…" autocomplete="off" spellcheck="false" data-search-input>
+      <button class="search__close" type="button" data-search-close>Esc<span class="visually-hidden"> — close search</span></button>
+    </form>
+    <ul class="search__results" role="list" data-search-results></ul>
+    <p class="visually-hidden" aria-live="polite" data-search-status></p>
+  </dialog>
+</body>
+</html>

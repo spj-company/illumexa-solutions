@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services in Detail &amp; FAQs | Illumexa Solutions</title>
+  <meta name="description" content="What each Illumexa service includes: seed funding and investment readiness, business formation, strategic consulting, and marketing and brand growth.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Cg transform='rotate(32 16 16)'%3E%3Crect x='12' y='4' width='8' height='12' rx='4' fill='%23cdf200'/%3E%3Crect x='14' y='16' width='8' height='12' rx='4' fill='%23cdf200'/%3E%3C/g%3E%3C/svg%3E">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Illumexa Solutions">
+  <meta property="og:title" content="Services in Detail | Illumexa Solutions">
+  <meta property="og:description" content="Everything included in Illumexa's support for founders, from seed funding to brand growth.">
+
+  <link rel="preload" href="../assets/fonts/poppins-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/images/logo/illumexa-mark.png" as="image" fetchpriority="high">
+
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/faq.css">
+
+  <script>
+    // Gate the reveal styles on JS (dropped again if the scripts never run), and open the
+    // page with the intro on the first page of a visit, or a short veil after that.
+    (function (root) {
+      root.classList.add('js');
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add(sessionStorage.getItem('illumexa-visited') ? 'is-arriving' : 'is-intro');
+          sessionStorage.setItem('illumexa-visited', '1');
+        }
+      } catch (error) {}
+      setTimeout(function () {
+        if (!window.illumexaReady) root.classList.remove('js');
+      }, 3000);
+    })(document.documentElement);
+  </script>
+  <script src="scripts/main.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite (kept renderable, not display:none, as the sprites that hold gradients need it).
+       Service icons are adapted from Lucide (ISC licence). -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>
+    </symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12h15M13 6l6 6-6 6"/>
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/>
+    </symbol>
+    <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/>
+    </symbol>
+    <symbol id="i-chevron-up" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1.5 8.5 8 2l6.5 6.5"/>
+    </symbol>
+
+    <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+    </symbol>
+    <symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="4" width="17" height="12" rx="2"/><circle cx="10.5" cy="10" r="2.6"/><path d="M22 8v9a3 3 0 0 1-3 3H5"/>
+    </symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" data-header data-motion>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Illumexa Solutions — home">
+        <img class="brand__mark" src="../assets/images/logo/illumexa-mark.png" alt="" width="127" height="176" decoding="async">
+        <span class="brand__word" aria-hidden="true">
+          <span class="brand__name">illumexa</span>
+          <span class="brand__sub">SOLUTIONS</span>
+        </span>
+      </a>
+
+      <div class="site-nav__menu" id="site-menu" data-menu>
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="about-us.html">About us</a></li>
+          <li><a class="nav-link" href="services.html">Services</a></li>
+          <li><a class="nav-link" href="#" data-page="investment-models">Investment models</a></li>
+          <li><a class="nav-link" href="#" data-page="portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="contact.html">Contact us</a></li>
+          <li class="nav-list__cta"><a class="btn btn--lime btn--sm" href="contact.html">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </div>
+
+      <div class="site-nav__actions">
+        <button class="nav-search" type="button" aria-label="Search" aria-haspopup="dialog" aria-controls="site-search" data-search-open>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+          <span class="nav-search__label" aria-hidden="true">Search</span>
+        </button>
+        <a class="btn btn--lime btn--sm site-nav__pitch" href="contact.html">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-menu-toggle>
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="details page-top" aria-labelledby="details-title">
+      <h1 class="visually-hidden" id="details-title">Our services in detail</h1>
+
+      <div class="container detail-list" data-accordion="multiple" data-search-type="Service detail">
+        <!-- Early-stage startups -->
+        <article class="dark-card detail card-reveal is-open" id="early-stage" data-accordion-item data-glow>
+          <h2 class="detail__heading">
+            <button class="detail__trigger" type="button" id="early-stage-title" aria-expanded="true" aria-controls="early-stage-panel" data-accordion-trigger>
+              <svg class="dark-card__icon fx-icon" aria-hidden="true" focusable="false"><use href="#i-rocket"/></svg>
+              <span class="detail__title word-reveal">Built for Early-<br class="detail__br">Stage Startups</span>
+              <svg class="detail__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-up"/></svg>
+            </button>
+          </h2>
+          <div class="detail__panel" id="early-stage-panel" role="region" aria-labelledby="early-stage-title">
+            <div class="detail__inner">
+              <dl class="detail__list" data-stagger>
+                <div class="detail__item reveal-up">
+                  <dt>Seed Stage Funding (₹10 Lakhs to ₹1 Crore)</dt>
+                  <dd>We provide seed stage investment ranging from ₹10 Lakhs to ₹1 Crore to help founders transform innovative ideas into successful and scalable businesses.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Investment Readiness</dt>
+                  <dd>We prepare startups for investment by strengthening their business model, refining their strategy, and ensuring they are ready to confidently engage with investors.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Pitch Evaluation</dt>
+                  <dd>We review and evaluate pitch decks, business plans, and presentations, providing constructive feedback to help founders communicate their vision and investment opportunity effectively.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Due Diligence Support</dt>
+                  <dd>We help founders organize the financial, legal, and operational documentation required during the investment process, ensuring they are well prepared for investor evaluation and due diligence.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </article>
+
+        <!-- Business formation -->
+        <article class="dark-card detail card-reveal is-open" id="business-formation" data-accordion-item data-glow>
+          <h2 class="detail__heading">
+            <button class="detail__trigger" type="button" id="business-formation-title" aria-expanded="true" aria-controls="business-formation-panel" data-accordion-trigger>
+              <svg class="dark-card__icon fx-icon" aria-hidden="true" focusable="false"><use href="#i-cash"/></svg>
+              <span class="detail__title word-reveal">Business Formation &amp;<br class="detail__br"> Facilitation</span>
+              <svg class="detail__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-up"/></svg>
+            </button>
+          </h2>
+          <div class="detail__panel" id="business-formation-panel" role="region" aria-labelledby="business-formation-title">
+            <div class="detail__inner">
+              <dl class="detail__list" data-stagger>
+                <div class="detail__item reveal-up">
+                  <dt>Company Registration</dt>
+                  <dd>We assist founders in selecting the appropriate business structure and completing the company registration process, ensuring a smooth and compliant business setup.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Compliance &amp; Documentation</dt>
+                  <dd>We help businesses meet statutory and regulatory requirements by managing essential documentation, registrations, and ongoing compliance obligations.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Banking &amp; Financial Setup</dt>
+                  <dd>We support founders in establishing business banking, payment systems, and financial processes to ensure efficient business operations from day one.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Business Licensing</dt>
+                  <dd>We assist in obtaining the licenses, permits, and registrations required to legally establish and operate your business.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Business Operations Support</dt>
+                  <dd>We provide operational guidance and support to help businesses streamline processes, improve efficiency, and build a strong foundation for sustainable growth.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Vendor &amp; Strategic Partner Connections</dt>
+                  <dd>We connect founders with trusted vendors, service providers, and strategic partners who can support business operations, growth, and long term success.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </article>
+
+        <!-- Strategic consulting -->
+        <article class="dark-card detail card-reveal is-open" id="strategic-consulting" data-accordion-item data-glow>
+          <h2 class="detail__heading">
+            <button class="detail__trigger" type="button" id="strategic-consulting-title" aria-expanded="true" aria-controls="strategic-consulting-panel" data-accordion-trigger>
+              <span class="dark-card__icon" aria-hidden="true"></span>
+              <span class="detail__title word-reveal">Strategic Business<br class="detail__br"> Consulting</span>
+              <svg class="detail__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-up"/></svg>
+            </button>
+          </h2>
+          <div class="detail__panel" id="strategic-consulting-panel" role="region" aria-labelledby="strategic-consulting-title">
+            <div class="detail__inner">
+              <dl class="detail__list" data-stagger>
+                <div class="detail__item reveal-up">
+                  <dt>Business Strategy</dt>
+                  <dd>We help founders define clear business objectives, develop competitive strategies, and create actionable plans that drive sustainable growth.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Business Model Development</dt>
+                  <dd>We work with entrepreneurs to design and refine business models that are scalable, sustainable, and aligned with market opportunities and customer needs.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Financial Planning</dt>
+                  <dd>We assist in developing financial plans, revenue projections, budgeting, and cash flow strategies that support informed decision making and long term business stability.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Market Entry Strategy</dt>
+                  <dd>We help businesses identify target markets, evaluate opportunities, and develop effective strategies for successfully entering and expanding into new markets.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Growth Consulting</dt>
+                  <dd>We provide strategic guidance to help businesses optimize performance, overcome growth challenges, and identify opportunities for expansion and long term success.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Operational Advisory</dt>
+                  <dd>We advise founders on improving business operations, enhancing efficiency, and implementing processes that support sustainable business growth.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Risk Assessment</dt>
+                  <dd>We help identify potential business, financial, and operational risks, enabling founders to make informed decisions and build resilient businesses.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </article>
+
+        <!-- Marketing & brand growth -->
+        <article class="dark-card detail card-reveal is-open" id="marketing" data-accordion-item data-glow>
+          <h2 class="detail__heading">
+            <button class="detail__trigger" type="button" id="marketing-title" aria-expanded="true" aria-controls="marketing-panel" data-accordion-trigger>
+              <span class="dark-card__icon" aria-hidden="true"></span>
+              <span class="detail__title word-reveal">Marketing &amp;<br class="detail__br"> Brand Growth</span>
+              <svg class="detail__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-up"/></svg>
+            </button>
+          </h2>
+          <div class="detail__panel" id="marketing-panel" role="region" aria-labelledby="marketing-title">
+            <div class="detail__inner">
+              <dl class="detail__list" data-stagger>
+                <div class="detail__item reveal-up">
+                  <dt>Brand Positioning</dt>
+                  <dd>We help founders define a clear brand identity, value proposition, and messaging that set their business apart in competitive markets.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Go-to-Market Strategy</dt>
+                  <dd>We plan product launches and market entry, identifying the right audiences, channels, and timing to reach customers effectively.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Digital Marketing</dt>
+                  <dd>We guide founders in building an effective online presence across search, social media, and content to attract and convert customers.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Market Research &amp; Customer Insights</dt>
+                  <dd>We help businesses understand their customers, competitors, and market trends to make informed marketing decisions.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Growth Campaigns</dt>
+                  <dd>We support founders in designing and measuring campaigns that drive customer acquisition, engagement, and sustainable revenue growth.</dd>
+                </div>
+                <div class="detail__item reveal-up">
+                  <dt>Partnerships &amp; Visibility</dt>
+                  <dd>We connect founders with media, industry, and strategic partners that increase brand visibility across India, the United States, and Europe.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <!-- data-motion: the ILLUMEXA outline draws itself as the footer scrolls in, a single light
+       passes through it, and the columns, links and rule reveal in sequence. -->
+  <footer class="site-footer" data-observe data-motion>
+    <svg class="site-footer__outline" viewBox="0 0 4606 1000" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="outline-sweep-fill" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".5" stop-color="#fff"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="outline-sweep" maskUnits="userSpaceOnUse" x="0" y="0" width="4606" height="1000">
+          <rect class="site-footer__sweep" x="-1400" y="0" width="1400" height="1000" fill="url(#outline-sweep-fill)"/>
+        </mask>
+      </defs>
+      <text class="site-footer__outline-text" x="2303" y="849" text-anchor="middle">ILLUMEXA</text>
+      <text class="site-footer__outline-text site-footer__outline-text--light" x="2303" y="849" text-anchor="middle" mask="url(#outline-sweep)">ILLUMEXA</text>
+    </svg>
+
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <p class="site-footer__name word-reveal">ILLUMEXA SOLUTIONS</p>
+        <p class="site-footer__about text-reveal">Architecting the future through strategic capital and technical excellence. The blueprint for modern innovation.</p>
+        <div class="site-footer__social reveal-group" data-stagger>
+          <a class="icon-btn reveal-item" href="index.html" aria-label="Illumexa Solutions website">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg>
+          </a>
+          <button class="icon-btn reveal-item" type="button" aria-label="Share this page" data-share>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-share"/></svg>
+          </button>
+          <span class="visually-hidden" aria-live="polite" data-share-status></span>
+        </div>
+      </div>
+
+      <nav class="site-footer__col" aria-labelledby="footer-quick">
+        <h2 class="site-footer__heading char-reveal" id="footer-quick">Quick Links</h2>
+        <ul class="site-footer__links reveal-group" role="list" data-stagger>
+          <li class="reveal-item"><a href="index.html">Home</a></li>
+          <li class="reveal-item"><a href="services.html">Services</a></li>
+          <li class="reveal-item"><a href="about-us.html">About Us</a></li>
+          <li class="reveal-item"><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-labelledby="footer-legal">
+        <h2 class="site-footer__heading char-reveal" id="footer-legal">Legal</h2>
+        <ul class="site-footer__links reveal-group" role="list" data-stagger>
+          <li class="reveal-item"><a href="#" data-page="privacy">Privacy</a></li>
+          <li class="reveal-item"><a href="#" data-page="terms">Terms</a></li>
+          <li class="reveal-item"><a href="faq.html" aria-current="page">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span class="site-footer__rule line-reveal" aria-hidden="true"></span>
+      <div class="container site-footer__bar reveal">
+        <p>© 2026 Illumexa Solutions. The blueprint for innovation.</p>
+        <p class="site-footer__meta"><span>Est. 2026</span><span>Global Ops</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SEARCH ============ -->
+  <dialog class="search" id="site-search" aria-labelledby="search-title" data-search>
+    <h2 class="visually-hidden" id="search-title">Search the site</h2>
+    <form class="search__form" role="search" data-search-form>
+      <img class="search__icon" src="../assets/images/logo/illumexa-mark.png" alt="" width="127" height="176" decoding="async">
+      <label class="visually-hidden" for="search-input">Search services, steps and questions</label>
+      <input class="search__input" id="search-input" type="search" placeholder="Search services, steps, FAQs…" autocomplete="off" spellcheck="false" data-search-input>
+      <button class="search__close" type="button" data-search-close>Esc<span class="visually-hidden"> — close search</span></button>
+    </form>
+    <ul class="search__results" role="list" data-search-results></ul>
+    <p class="visually-hidden" aria-live="polite" data-search-status></p>
+  </dialog>
+</body>
+</html>

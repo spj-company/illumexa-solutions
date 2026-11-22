@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& 'C:\\\\Users\\\\admin\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-admin-Documents-projects-illumexa-website\\\\ce831fe3-5ff3-498f-95a5-15bc1cf270c4\\\\scratchpad\\\\serve.ps1')"
+    ]
+  }
+}

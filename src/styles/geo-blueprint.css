@@ -1,0 +1,1044 @@
+/* ==========================================================================
+   Illumexa global blueprint (Contact, About)
+   The three service regions drawn as a technical plate on the shared world map. One
+   component, two surfaces: --panel is a small dark plate of its own (Contact); --overlay
+   is laid over an existing map card (About). geo-blueprint.js adds the drawing.
+
+   Sequence, once a quarter of the root is in view (.is-visible from main.js):
+     grid → coastline (with a plotter scan) → graticule, construction and measure lines →
+     connections → India → Europe → USA → a light travels India → Europe → USA → settles.
+   At rest the only motion is a faint pass of that light every few seconds, paused off
+   screen ([data-ambient]). With reduced motion everything is simply shown.
+   ========================================================================== */
+
+.geo-blueprint {
+  --bp-lime: #c6e70b;
+  --bp-lime-light: #d7f23e;
+
+  /* Timing, shared by both surfaces (--bp-t0 offsets the whole sequence). */
+  --bp-t0: 0ms;
+  --bp-grid-at: var(--bp-t0);
+  --bp-land-at: calc(var(--bp-t0) + 250ms);
+  --bp-lines-at: calc(var(--bp-t0) + 650ms);
+  --bp-links-at: calc(var(--bp-t0) + 1150ms);
+  --bp-hubs-at: calc(var(--bp-t0) + 1750ms);
+  --bp-hub-step: 260ms;
+  --bp-energy-at: calc(var(--bp-t0) + 2650ms);
+
+  /* Ink on black (the panel). */
+  --bp-grid-minor: rgba(255, 255, 255, 0.035);
+  --bp-grid-major: rgba(255, 255, 255, 0.07);
+  --bp-rule: rgba(255, 255, 255, 0.09);
+  --bp-guide: rgba(255, 255, 255, 0.13);
+  --bp-coast: rgba(215, 242, 62, 0.42);
+  --bp-dots: rgba(198, 231, 11, 0.17);
+  --bp-link: var(--bp-lime);
+  --bp-link-faint: rgba(255, 255, 255, 0.24);
+  --bp-measure: rgba(255, 255, 255, 0.24);
+  --bp-text: rgba(255, 255, 255, 0.52);
+  --bp-text-strong: #fff;
+  --bp-tick: rgba(255, 255, 255, 0.26);
+  --bp-corner: rgba(198, 231, 11, 0.5);
+  --bp-glow: rgba(198, 231, 11, 0.4);
+  --bp-paper: #000; /* halo behind small labels, so they read over line work */
+  --bp-inset: 12px;
+}
+
+/* Ink on the light map card (About). */
+.geo-blueprint--overlay {
+  --bp-t0: 250ms;
+  --bp-grid-minor: rgba(0, 0, 0, 0.025);
+  --bp-grid-major: rgba(0, 0, 0, 0.045);
+  --bp-rule: rgba(0, 0, 0, 0.07);
+  --bp-guide: rgba(0, 0, 0, 0.12);
+  --bp-coast: rgba(198, 231, 11, 0.62);
+  --bp-link-faint: rgba(0, 0, 0, 0.2);
+  --bp-measure: rgba(0, 0, 0, 0.26);
+  --bp-text: #5c5c5c;
+  --bp-text-strong: #000;
+  --bp-tick: rgba(0, 0, 0, 0.28);
+  --bp-corner: rgba(0, 0, 0, 0.38);
+  --bp-glow: rgba(198, 231, 11, 0.55);
+  --bp-paper: #f3f3f4;
+  --bp-inset: 26px;
+}
+
+/* Small labels drawn over the map knock the lines out around their letters. */
+.geo-blueprint__measure,
+.geo-hub__label,
+.geo-hub__coords,
+.geo-blueprint__tick.is-major::after,
+.geo-blueprint__mark::after {
+  text-shadow: 0 0 2px var(--bp-paper), 0 0 4px var(--bp-paper), 0 0 6px var(--bp-paper);
+}
+
+/* Panel ----------------------------------------------------------------------- */
+.geo-blueprint--panel {
+  display: grid;
+  grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
+  gap: 28px;
+  padding: 24px;
+  border: 1px solid rgba(198, 231, 11, 0.14);
+  border-radius: 20px;
+  background: #0b0f08;
+  color: var(--c-white);
+}
+
+.geo-blueprint__plate {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 4px 0 2px 4px;
+}
+
+.geo-blueprint__kicker,
+.geo-blueprint__meta {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bp-text);
+}
+
+.geo-blueprint__title {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bp-text-strong);
+}
+
+/* A dimension line under the title: a lime rule with end ticks. */
+.geo-blueprint__rule {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 12px;
+  background: var(--bp-lime);
+  transform-origin: left center;
+}
+
+.geo-blueprint__rule::before,
+.geo-blueprint__rule::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: inherit;
+}
+
+.geo-blueprint__rule::before { left: 0; }
+.geo-blueprint__rule::after { right: 0; }
+
+.geo-blueprint__keys {
+  display: grid;
+  gap: 2px;
+  margin-top: 16px;
+}
+
+.geo-blueprint__key {
+  display: grid;
+  grid-template-columns: 26px auto minmax(0, 1fr);
+  align-items: baseline;
+  width: 100%;
+  padding: 8px 8px 8px 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 350ms var(--ease-out), border-color 350ms var(--ease-out), color 350ms var(--ease-out);
+}
+
+.geo-blueprint__key-index {
+  color: var(--bp-lime);
+}
+
+.geo-blueprint__key-coords {
+  justify-self: end;
+  padding-left: 10px;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--bp-text);
+  white-space: nowrap;
+  transition: color 350ms var(--ease-out);
+}
+
+.geo-blueprint__key.is-hot {
+  border-color: rgba(198, 231, 11, 0.2);
+  background: rgba(198, 231, 11, 0.05);
+  color: var(--c-white);
+}
+
+.geo-blueprint__key.is-hot .geo-blueprint__key-coords {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.geo-blueprint__key.is-active {
+  border-color: rgba(198, 231, 11, 0.42);
+}
+
+.geo-blueprint__plate .geo-blueprint__meta {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+/* The map window of the panel: a band from about 65°N to the equator, 150°W to 150°E. */
+.geo-blueprint__stage {
+  --map-width: 120%;
+  --map-left: -6.667%;
+  --map-top: -27.25%;
+  aspect-ratio: 1200 / 366;
+  align-self: center;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  background: var(--c-black);
+}
+
+.geo-blueprint--panel .world-map__canvas {
+  aspect-ratio: 1440 / 962;
+}
+
+/* Land as a fine lime dot field, cut to the continents by the map itself. */
+.geo-blueprint__land {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--bp-dots) 0.9px, transparent 1.4px);
+  background-size: 6px 6px;
+  -webkit-mask: url("../../assets/images/world-map.svg") center / 100% 100% no-repeat;
+  mask: url("../../assets/images/world-map.svg") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* Drawing layers ---------------------------------------------------------------- */
+.geo-blueprint__grid {
+  position: absolute;
+  inset: -24px 0;
+  background-image:
+    linear-gradient(var(--bp-grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-major) 1px, transparent 1px),
+    linear-gradient(var(--bp-grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-minor) 1px, transparent 1px);
+  background-position: center;
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 45%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 45%, transparent 100%);
+  pointer-events: none;
+}
+
+.geo-blueprint__coast,
+.geo-blueprint__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.bp-coast-line {
+  fill: none;
+  stroke: var(--bp-coast);
+  stroke-width: calc(var(--u, 1) * 0.9px);
+  stroke-linejoin: round;
+}
+
+.bp-grat,
+.bp-guide,
+.bp-chord,
+.bp-chord-ends,
+.bp-link,
+.bp-send,
+.bp-energy__halo,
+.bp-energy__core {
+  fill: none;
+  stroke-width: calc(var(--u, 1) * 1px);
+}
+
+.bp-grat { stroke: var(--bp-rule); }
+.bp-guide { stroke: var(--bp-guide); }
+.bp-chord,
+.bp-chord-ends { stroke: var(--bp-measure); }
+
+.bp-link {
+  stroke: var(--bp-link);
+  stroke-width: calc(var(--u, 1) * 1.3px);
+  stroke-linecap: round;
+  opacity: 0.85;
+  transition: opacity 400ms var(--ease-out), stroke 400ms var(--ease-out), stroke-width 400ms var(--ease-out);
+}
+
+.bp-link--faint {
+  stroke: var(--bp-link-faint);
+  stroke-width: calc(var(--u, 1) * 1px);
+  stroke-dasharray: 0.004 0.007;
+  opacity: 1;
+}
+
+/* Hovered, focused or chosen: its connections brighten, the others step back. */
+.bp-link.is-hot {
+  stroke: var(--bp-lime-light);
+  stroke-width: calc(var(--u, 1) * 2px);
+  opacity: 1;
+}
+
+.bp-link--faint.is-hot {
+  stroke: var(--bp-lime);
+  stroke-width: calc(var(--u, 1) * 1.2px);
+}
+
+.geo-blueprint.has-hot .bp-link:not(.is-hot) {
+  opacity: 0.35;
+}
+
+.bp-chord.is-hot,
+.bp-chord-ends.is-hot {
+  stroke: var(--bp-text);
+}
+
+/* The light: a short bright dash with a soft halo, running along the arcs. */
+.bp-energy__halo,
+.bp-energy__core,
+.bp-send {
+  stroke-linecap: round;
+  stroke-dasharray: 0.06 2;
+  stroke-dashoffset: 0.07;
+}
+
+.bp-energy__core,
+.bp-send {
+  stroke: var(--bp-lime-light);
+  stroke-width: calc(var(--u, 1) * 2px);
+}
+
+.bp-energy__halo {
+  stroke: var(--bp-lime);
+  stroke-width: calc(var(--u, 1) * 6px);
+  opacity: 0.2;
+}
+
+.bp-send {
+  stroke-dasharray: 0.1 2;
+  stroke-dashoffset: 0.11;
+}
+
+.bp-send.is-sending {
+  animation: bp-travel 1300ms var(--ease-in-out) both;
+}
+
+.bp-send.is-sending.is-reverse {
+  animation-direction: reverse;
+}
+
+/* A vertical plotter line that crosses the map as the coastline is drawn. */
+.geo-blueprint__scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--bp-lime) 30%, var(--bp-lime) 70%, transparent);
+  box-shadow: 0 0 8px var(--bp-glow);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Distances read along each measured chord. */
+.geo-blueprint__measure {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform-origin: 0 0;
+  transform: rotate(var(--a)) translate(-50%, calc(-100% - 5px));
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--bp-text);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: color 350ms var(--ease-out);
+}
+
+.geo-blueprint__measure.is-hot {
+  color: var(--bp-text-strong);
+}
+
+/* Hubs ------------------------------------------------------------------------ */
+/* Each hub is a zero-size anchor on its point: reticle, lime dot and a tiny label. */
+.geo-hub {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  z-index: 1;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.geo-hub:focus-visible {
+  outline: none;
+}
+
+.geo-hub__hit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  translate: -50% -50%;
+}
+
+.geo-hub:focus-visible .geo-hub__hit {
+  outline: 2px solid var(--bp-lime);
+  outline-offset: 2px;
+}
+
+.geo-hub__reticle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  max-width: none;
+  height: 40px;
+  overflow: visible;
+  translate: -50% -50%;
+  pointer-events: none;
+  transition: scale 450ms var(--ease-expo);
+}
+
+.geo-hub__ring {
+  fill: none;
+  stroke: var(--bp-lime);
+  stroke-width: 1;
+  opacity: 0.7;
+  transform: rotate(-90deg);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 350ms var(--ease-out), stroke 350ms var(--ease-out);
+}
+
+.geo-hub__ticks {
+  fill: none;
+  stroke: var(--bp-tick);
+  stroke-width: 1;
+}
+
+.geo-hub__dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bp-lime);
+  box-shadow: 0 0 0 3px rgba(198, 231, 11, 0.12), 0 0 8px rgba(198, 231, 11, 0.25);
+  translate: -50% -50%;
+  pointer-events: none;
+  transition: width 400ms var(--ease-expo), height 400ms var(--ease-expo), box-shadow 400ms var(--ease-out), background-color 400ms var(--ease-out);
+}
+
+.geo-hub__label,
+.geo-hub__coords {
+  position: absolute;
+  font-family: var(--font-body);
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: color 350ms var(--ease-out);
+}
+
+.geo-hub__label {
+  left: 14px;
+  top: -24px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bp-text);
+}
+
+.geo-hub__index {
+  margin-right: 0.6em;
+  color: var(--bp-lime);
+}
+
+/* Labels sit where the arcs leave room: above Europe and the USA, east of India. */
+.geo-hub:is([data-hub="europe"], [data-hub="usa"]) .geo-hub__label {
+  left: 0;
+  top: -30px;
+  transform: translateX(-50%);
+}
+
+.geo-hub__coords {
+  display: none;
+  left: 30px;
+  top: -5px;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--bp-text);
+}
+
+.geo-hub.is-hot .geo-hub__reticle {
+  scale: 1.18;
+}
+
+.geo-hub.is-hot .geo-hub__ring {
+  stroke: var(--bp-lime-light);
+  opacity: 1;
+}
+
+.geo-hub.is-hot .geo-hub__dot {
+  width: 8px;
+  height: 8px;
+  background: var(--bp-lime-light);
+  box-shadow: 0 0 0 4px rgba(198, 231, 11, 0.18), 0 0 14px var(--bp-glow);
+}
+
+.geo-hub.is-hot :is(.geo-hub__label, .geo-hub__coords) {
+  color: var(--bp-text-strong);
+}
+
+/* Frame ----------------------------------------------------------------------- */
+.geo-blueprint__frame {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.geo-blueprint__corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 0 solid var(--bp-corner);
+}
+
+.geo-blueprint__corner--tl { top: var(--bp-inset); left: var(--bp-inset); border-top-width: 1px; border-left-width: 1px; }
+.geo-blueprint__corner--tr { top: var(--bp-inset); right: var(--bp-inset); border-top-width: 1px; border-right-width: 1px; }
+.geo-blueprint__corner--bl { bottom: var(--bp-inset); left: var(--bp-inset); border-bottom-width: 1px; border-left-width: 1px; }
+.geo-blueprint__corner--br { bottom: var(--bp-inset); right: var(--bp-inset); border-bottom-width: 1px; border-right-width: 1px; }
+
+/* Rulers span the whole window so their ticks can use the canvas crop (percentages of
+   its width, like the canvas's own margins); their ends fade out before the corners. */
+.geo-blueprint__ruler {
+  position: absolute;
+  inset: 0;
+}
+
+.geo-blueprint__ruler--x {
+  -webkit-mask-image: linear-gradient(90deg, transparent calc(var(--bp-inset) + 18px), #000 calc(var(--bp-inset) + 48px), #000 calc(100% - var(--bp-inset) - 48px), transparent calc(100% - var(--bp-inset) - 18px));
+  mask-image: linear-gradient(90deg, transparent calc(var(--bp-inset) + 18px), #000 calc(var(--bp-inset) + 48px), #000 calc(100% - var(--bp-inset) - 48px), transparent calc(100% - var(--bp-inset) - 18px));
+}
+
+.geo-blueprint__ruler--y {
+  -webkit-mask-image: linear-gradient(180deg, transparent calc(var(--bp-inset) + 18px), #000 calc(var(--bp-inset) + 40px), #000 calc(100% - var(--bp-inset) - 40px), transparent calc(100% - var(--bp-inset) - 18px));
+  mask-image: linear-gradient(180deg, transparent calc(var(--bp-inset) + 18px), #000 calc(var(--bp-inset) + 40px), #000 calc(100% - var(--bp-inset) - 40px), transparent calc(100% - var(--bp-inset) - 18px));
+}
+
+.geo-blueprint__tick,
+.geo-blueprint__mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--bp-tick);
+}
+
+.geo-blueprint__ruler--x :is(.geo-blueprint__tick, .geo-blueprint__mark) {
+  left: calc(var(--map-left, 0%) + var(--m) * var(--map-width, 100%));
+  width: 1px;
+  height: 5px;
+}
+
+/* Vertical positions use margin-top, which (like the canvas's) resolves against width. */
+.geo-blueprint__ruler--y :is(.geo-blueprint__tick, .geo-blueprint__mark) {
+  margin-top: calc(var(--map-top, 0%) + var(--m) * var(--map-width, 100%) * 0.668056);
+  width: 5px;
+  height: 1px;
+}
+
+.geo-blueprint__ruler--x .geo-blueprint__tick.is-major { height: 9px; }
+.geo-blueprint__ruler--y .geo-blueprint__tick.is-major { width: 9px; }
+
+.geo-blueprint__tick.is-major::after,
+.geo-blueprint__mark::after {
+  content: attr(data-label);
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: var(--bp-text);
+  white-space: nowrap;
+}
+
+/* Degree labels ride beside their ticks; the hub numbers sit a row further in. */
+.geo-blueprint__ruler--x .geo-blueprint__tick.is-major::after { top: 1px; left: 5px; }
+.geo-blueprint__ruler--y .geo-blueprint__tick.is-major::after { top: 4px; left: 2px; }
+
+/* A hub's coordinates, projected to the rulers: a longer lime tick and its number. */
+.geo-blueprint__mark {
+  background: var(--bp-lime);
+  transition: background-color 350ms var(--ease-out), height 350ms var(--ease-expo), width 350ms var(--ease-expo);
+}
+
+.geo-blueprint__ruler--x .geo-blueprint__mark { height: 12px; }
+.geo-blueprint__ruler--y .geo-blueprint__mark { width: 12px; }
+
+.geo-blueprint__mark::after {
+  font-weight: 600;
+  color: var(--bp-lime);
+  transition: color 350ms var(--ease-out);
+}
+
+.geo-blueprint__ruler--x .geo-blueprint__mark::after { top: 15px; left: 0; transform: translateX(-50%); }
+.geo-blueprint__ruler--y .geo-blueprint__mark::after { top: 0; left: 15px; transform: translateY(-50%); }
+
+.geo-blueprint__ruler--x .geo-blueprint__mark.is-hot { height: 16px; }
+.geo-blueprint__ruler--y .geo-blueprint__mark.is-hot { width: 16px; }
+
+.geo-blueprint__mark.is-hot {
+  background: var(--bp-lime-light);
+}
+
+.geo-blueprint__mark.is-hot::after {
+  color: var(--bp-text-strong);
+}
+
+/* Overlay (About) ---------------------------------------------------------------- */
+/* The existing pins are the markers: the hub keeps its reticle and coordinates, and a
+   transparent hit area over pin and label makes the whole pin the control. */
+.geo-blueprint--overlay .geo-hub__dot,
+.geo-blueprint--overlay .geo-hub__label {
+  display: none;
+}
+
+.geo-blueprint--overlay .geo-hub__coords {
+  display: block;
+}
+
+.geo-blueprint--overlay .geo-hub__ring {
+  r: 14px;
+}
+
+.geo-blueprint--overlay .geo-hub__hit {
+  width: clamp(56px, 7.2vw, 104px);
+  height: clamp(96px, 12.2vw, 176px);
+  border-radius: 16px;
+  translate: -50% -52%;
+}
+
+.geo-blueprint--overlay .map-pin__marker {
+  transform-origin: 50% 100%;
+  transition: scale 450ms var(--ease-expo), filter 450ms var(--ease-out);
+}
+
+.geo-blueprint--overlay .map-pin__label {
+  transition: box-shadow 400ms var(--ease-out), translate 450ms var(--ease-expo);
+}
+
+.geo-blueprint--overlay .map-pin::after {
+  transition: box-shadow 400ms var(--ease-out);
+}
+
+.geo-blueprint--overlay .map-pin.is-hot .map-pin__marker {
+  scale: 1.07;
+  filter: drop-shadow(0 8px 12px rgba(150, 190, 0, 0.45));
+}
+
+.geo-blueprint--overlay .map-pin.is-hot .map-pin__label {
+  translate: -50% -2px;
+  box-shadow: 0 0 0 1.5px var(--bp-lime), 0 10px 24px -8px rgba(0, 0, 0, 0.32);
+}
+
+.geo-blueprint--overlay .map-pin.is-hot::after {
+  box-shadow: 0 0 0 5px rgba(198, 231, 11, 0.28), 0 0 14px var(--bp-glow);
+}
+
+/* The title block sits in the open ocean at the card's lower left. */
+.geo-blueprint--overlay .geo-blueprint__plate {
+  position: absolute;
+  left: 44px;
+  bottom: 34px;
+  z-index: 2;
+  padding: 0;
+  pointer-events: none;
+}
+
+.geo-blueprint--overlay .geo-blueprint__title {
+  margin-top: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+}
+
+.geo-blueprint--overlay .geo-blueprint__rule {
+  margin-top: 8px;
+}
+
+.geo-blueprint--overlay .geo-blueprint__meta {
+  margin-top: 8px;
+  padding-top: 0;
+  font-size: 0.5625rem;
+}
+
+/* Degree labels clear the card's border. */
+.geo-blueprint--overlay .geo-blueprint__ruler--x .geo-blueprint__tick.is-major::after {
+  top: 4px;
+}
+
+/* Sequence -------------------------------------------------------------------- */
+/* Everything waits for .is-visible; without script nothing is hidden. */
+.js .geo-blueprint:not(.is-visible) :is(.geo-blueprint__grid, .geo-blueprint__land, .geo-blueprint__coast, .bp-link--faint, .bp-chord-ends, .geo-blueprint__measure, .geo-blueprint__tick, .geo-blueprint__mark, .geo-blueprint__corner, .geo-blueprint__plate > *) {
+  opacity: 0;
+}
+
+.js .geo-blueprint:not(.is-visible) .geo-hub {
+  visibility: hidden;
+}
+
+.js .geo-blueprint .bp-draw {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.02;
+}
+
+/* 1. Grid */
+.js .geo-blueprint.is-visible .geo-blueprint__grid {
+  animation: bp-wipe-down 1200ms var(--ease-expo) var(--bp-grid-at) both;
+}
+
+.js .geo-blueprint.is-visible .geo-blueprint__corner {
+  animation: bp-fade 700ms var(--ease-out) var(--bp-grid-at) both;
+}
+
+/* 2. Coastline, behind a plotter line */
+.js .geo-blueprint.is-visible :is(.geo-blueprint__coast, .geo-blueprint__land) {
+  animation: bp-wipe-right 1500ms var(--ease-in-out) var(--bp-land-at) both;
+}
+
+.js .geo-blueprint.is-visible .geo-blueprint__scan {
+  animation: bp-scan 1500ms var(--ease-in-out) var(--bp-land-at) both;
+}
+
+/* 3. Technical lines: graticule, rulers, construction lines, measured chords */
+.js .geo-blueprint.is-visible .bp-grat {
+  animation: stroke-draw 1100ms var(--ease-out) calc(var(--bp-lines-at) + var(--d, 0) * 40ms) both;
+}
+
+.js .geo-blueprint.is-visible .geo-blueprint__tick {
+  animation: bp-fade 800ms var(--ease-out) calc(var(--bp-lines-at) + 150ms) both;
+}
+
+.js .geo-blueprint.is-visible .bp-guide {
+  animation: stroke-draw 1000ms var(--ease-in-out) calc(var(--bp-lines-at) + 250ms + var(--n, 0) * 120ms) both;
+}
+
+.js .geo-blueprint.is-visible .bp-chord {
+  animation: stroke-draw 900ms var(--ease-in-out) calc(var(--bp-lines-at) + 450ms + var(--d, 0) * 150ms) both;
+}
+
+.js .geo-blueprint.is-visible .bp-chord-ends {
+  animation: bp-fade 500ms var(--ease-out) calc(var(--bp-lines-at) + 900ms + var(--d, 0) * 150ms) both;
+}
+
+/* 4. Connections */
+.js .geo-blueprint.is-visible .bp-link.bp-draw {
+  animation: stroke-draw 1100ms var(--ease-in-out) calc(var(--bp-links-at) + var(--d, 0) * 220ms) both;
+}
+
+.js .geo-blueprint.is-visible .bp-link--faint {
+  animation: bp-fade 1000ms var(--ease-out) calc(var(--bp-links-at) + 500ms) both;
+}
+
+/* 5–7. India, Europe, USA: reticle traced, dot set, label and ruler marks */
+.js .geo-blueprint.is-visible .geo-hub__ring {
+  animation: bp-ring 900ms var(--ease-out) calc(var(--bp-hubs-at) + var(--n, 0) * var(--bp-hub-step)) both;
+}
+
+.js .geo-blueprint.is-visible .geo-hub__ticks {
+  animation: bp-fade 600ms var(--ease-out) calc(var(--bp-hubs-at) + var(--n, 0) * var(--bp-hub-step) + 200ms) both;
+}
+
+.js .geo-blueprint.is-visible .geo-hub__dot {
+  animation: bp-dot 700ms var(--ease-expo) calc(var(--bp-hubs-at) + var(--n, 0) * var(--bp-hub-step) + 120ms) both;
+}
+
+.js .geo-blueprint.is-visible :is(.geo-hub__label, .geo-hub__coords) {
+  animation: bp-label 800ms var(--ease-expo) calc(var(--bp-hubs-at) + var(--n, 0) * var(--bp-hub-step) + 260ms) both;
+}
+
+.js .geo-blueprint.is-visible .geo-blueprint__mark {
+  animation: bp-fade 600ms var(--ease-out) calc(var(--bp-hubs-at) + var(--n, 0) * var(--bp-hub-step) + 200ms) both;
+}
+
+.js .geo-blueprint.is-visible .geo-blueprint__measure {
+  animation: bp-fade 700ms var(--ease-out) calc(var(--bp-hubs-at) + 500ms + var(--d, 0) * 150ms) both;
+}
+
+/* 8–9. The light runs India → Europe → USA once, then passes faintly now and then. */
+.js .geo-blueprint.is-visible :is(.bp-energy__core, .bp-energy__halo) {
+  animation:
+    bp-travel 1900ms var(--ease-in-out) var(--bp-energy-at) both,
+    bp-idle 12s linear calc(var(--bp-energy-at) + 7s) infinite;
+}
+
+.geo-blueprint:not(.is-in-view) :is(.bp-energy__core, .bp-energy__halo, .bp-send) {
+  animation-play-state: paused;
+}
+
+/* The plate follows the drawing: title with the grid, keys with their hubs. */
+.js .geo-blueprint.is-visible .geo-blueprint__plate > * {
+  animation: bp-label 800ms var(--ease-expo) calc(var(--bp-grid-at) + var(--k, 0) * 90ms) both;
+}
+
+.geo-blueprint__plate > :nth-child(2) { --k: 1; }
+.geo-blueprint__plate > :nth-child(3) { --k: 3; }
+
+.js .geo-blueprint.is-visible .geo-blueprint__plate > .geo-blueprint__rule {
+  animation: bp-rule 1000ms var(--ease-expo) calc(var(--bp-grid-at) + 250ms) both;
+}
+
+.js .geo-blueprint.is-visible .geo-blueprint__plate > .geo-blueprint__keys {
+  animation: none;
+}
+
+.js .geo-blueprint:not(.is-visible) .geo-blueprint__key {
+  opacity: 0;
+}
+
+.js .geo-blueprint.is-visible .geo-blueprint__keys > li:nth-child(1) .geo-blueprint__key { --n: 0; }
+.js .geo-blueprint.is-visible .geo-blueprint__keys > li:nth-child(2) .geo-blueprint__key { --n: 1; }
+.js .geo-blueprint.is-visible .geo-blueprint__keys > li:nth-child(3) .geo-blueprint__key { --n: 2; }
+
+.js .geo-blueprint.is-visible .geo-blueprint__key {
+  animation: bp-label 800ms var(--ease-expo) calc(var(--bp-hubs-at) + var(--n, 0) * var(--bp-hub-step) + 200ms) both;
+}
+
+.js .geo-blueprint.is-visible .geo-blueprint__plate > .geo-blueprint__meta {
+  animation-delay: var(--bp-lines-at);
+}
+
+@keyframes bp-wipe-down {
+  from { clip-path: inset(0 0 100% 0); opacity: 0.4; }
+}
+
+@keyframes bp-wipe-right {
+  from { clip-path: inset(0 100% 0 0); }
+}
+
+@keyframes bp-scan {
+  from { left: 0%; opacity: 0; }
+  12% { opacity: 0.8; }
+  85% { opacity: 0.8; }
+  to { left: 100%; opacity: 0; }
+}
+
+@keyframes bp-fade {
+  from { opacity: 0; }
+}
+
+@keyframes bp-ring {
+  from { stroke-dasharray: 1 2; stroke-dashoffset: 1.02; }
+  to { stroke-dasharray: 1 2; stroke-dashoffset: 0; }
+}
+
+@keyframes bp-dot {
+  from { opacity: 0; scale: 0; }
+}
+
+@keyframes bp-label {
+  from { opacity: 0; translate: 0 5px; }
+}
+
+@keyframes bp-rule {
+  from { scale: 0 1; }
+}
+
+@keyframes bp-travel {
+  from { stroke-dashoffset: 0.07; }
+  to { stroke-dashoffset: -1.01; }
+}
+
+@keyframes bp-idle {
+  0% { stroke-dashoffset: 0.07; opacity: 0; }
+  2% { opacity: 0.5; }
+  24% { stroke-dashoffset: -1.01; opacity: 0.5; }
+  24.1%,
+  100% { stroke-dashoffset: -1.01; opacity: 0; }
+}
+
+/* Scroll (desktop): the drawing gains ink as it arrives and the grid drifts behind it. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    .geo-blueprint {
+      view-timeline-name: --blueprint;
+    }
+
+    .js .geo-blueprint .geo-blueprint__lines {
+      animation: bp-ink linear both;
+      animation-timeline: --blueprint;
+      animation-range: entry 0% cover 45%;
+    }
+
+    .js .geo-blueprint.is-visible .geo-blueprint__grid {
+      animation:
+        bp-wipe-down 1200ms var(--ease-expo) var(--bp-grid-at) both,
+        bp-grid-drift linear both;
+      animation-timeline: auto, --blueprint;
+      animation-range: normal, cover;
+    }
+  }
+}
+
+@keyframes bp-ink {
+  from { opacity: 0.45; }
+}
+
+@keyframes bp-grid-drift {
+  from { translate: 0 14px; }
+  to { translate: 0 -14px; }
+}
+
+/* Responsive ------------------------------------------------------------------ */
+/* Narrow desktops: the panel's map is small, so distances and ruler numbers step out. */
+@media (max-width: 1279px) {
+  .geo-blueprint--panel .geo-blueprint__measure,
+  .geo-blueprint__mark::after {
+    display: none;
+  }
+}
+
+/* Tablet: the plate becomes a header row over a full-width map. */
+@media (max-width: 1023px) {
+  .geo-blueprint--panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .geo-blueprint--panel .geo-blueprint__plate {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+    column-gap: 32px;
+    align-items: start;
+    padding: 0;
+  }
+
+  .geo-blueprint--panel .geo-blueprint__plate > :not(.geo-blueprint__keys) {
+    grid-column: 1;
+  }
+
+  .geo-blueprint--panel .geo-blueprint__keys {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    margin-top: 0;
+  }
+
+  .geo-blueprint--panel .geo-blueprint__meta {
+    padding-top: 12px;
+  }
+
+  .geo-blueprint__measure {
+    display: none;
+  }
+
+  .geo-blueprint--overlay {
+    --bp-coast: rgba(198, 231, 11, 0.5);
+  }
+}
+
+/* Phone: a compact plate, a closer crop, and only the essential line work. */
+@media (max-width: 767px) {
+  .geo-blueprint--panel {
+    gap: 16px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .geo-blueprint--panel .geo-blueprint__plate {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .geo-blueprint--panel .geo-blueprint__keys {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .geo-blueprint__key {
+    grid-template-columns: auto auto;
+    justify-content: center;
+    column-gap: 6px;
+    padding: 8px 4px;
+    border-color: rgba(255, 255, 255, 0.08);
+    letter-spacing: 0.1em;
+  }
+
+  .geo-blueprint__key-coords {
+    display: none;
+  }
+
+  .geo-blueprint__stage {
+    --map-width: 150%;
+    --map-left: -14.583%;
+    --map-top: -32.06%;
+    aspect-ratio: 960 / 385;
+    border-radius: 10px;
+  }
+
+  .bp-guides,
+  .bp-measure,
+  .geo-blueprint__ruler,
+  .geo-hub__label,
+  .geo-hub__coords,
+  .geo-blueprint--overlay .geo-blueprint__plate {
+    display: none;
+  }
+
+  .geo-blueprint--overlay .geo-hub__coords {
+    display: none;
+  }
+
+  .geo-hub__reticle {
+    width: 30px;
+    height: 30px;
+  }
+
+  .geo-blueprint {
+    --bp-inset: 8px;
+  }
+
+  /* The whole map shows at this size, so the coastline trace is kept lighter. */
+  .geo-blueprint--overlay {
+    --bp-inset: 14px;
+    --bp-coast: rgba(198, 231, 11, 0.45);
+  }
+}

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact &amp; Pitch | Illumexa Solutions</title>
+  <meta name="description" content="Pitch your venture to Illumexa Solutions. Share your pitch deck and email; we review every application personally. We work across India, Europe and the USA.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Cg transform='rotate(32 16 16)'%3E%3Crect x='12' y='4' width='8' height='12' rx='4' fill='%23cdf200'/%3E%3Crect x='14' y='16' width='8' height='12' rx='4' fill='%23cdf200'/%3E%3C/g%3E%3C/svg%3E">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Illumexa Solutions">
+  <meta property="og:title" content="Launch Your Venture | Illumexa Solutions">
+  <meta property="og:description" content="Submit your pitch deck to Illumexa Solutions.">
+
+  <link rel="preload" href="../assets/fonts/poppins-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/images/logo/illumexa-mark.png" as="image" fetchpriority="high">
+
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/contact.css">
+  <link rel="stylesheet" href="styles/geo-blueprint.css">
+
+  <script>
+    // Gate the reveal styles on JS (dropped again if the scripts never run), and open the
+    // page with the intro on the first page of a visit, or a short veil after that.
+    (function (root) {
+      root.classList.add('js');
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add(sessionStorage.getItem('illumexa-visited') ? 'is-arriving' : 'is-intro');
+          sessionStorage.setItem('illumexa-visited', '1');
+        }
+      } catch (error) {}
+      setTimeout(function () {
+        if (!window.illumexaReady) root.classList.remove('js');
+      }, 3000);
+    })(document.documentElement);
+  </script>
+  <script src="scripts/main.js" defer></script>
+  <script src="scripts/contact.js" defer></script>
+  <script src="scripts/contact-locations.js" defer></script>
+  <script src="scripts/geo-blueprint.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite (kept renderable, not display:none, so gradients resolve).
+       Upload, check and alert icons are adapted from Lucide (ISC licence). -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="grad-map-pin" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#C8F000"/>
+        <stop offset="1" stop-color="#7FB000"/>
+      </linearGradient>
+    </defs>
+
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>
+    </symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12h15M13 6l6 6-6 6"/>
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/>
+    </symbol>
+    <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.5a7 7 0 0 0-7 7c0 5.1 7 12.5 7 12.5s7-7.4 7-12.5a7 7 0 0 0-7-7Zm0 9.8a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6Z"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16.5h.01"/>
+    </symbol>
+    <symbol id="map-pin" viewBox="0 0 40 52">
+      <path d="M20 1.5C9.8 1.5 1.5 9.6 1.5 19.7 1.5 33.2 20 50.5 20 50.5S38.5 33.2 38.5 19.7C38.5 9.6 30.2 1.5 20 1.5Z" fill="url(#grad-map-pin)"/>
+      <circle cx="20" cy="19" r="7.6" fill="#fff"/>
+    </symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <!-- data-motion: staged entrance (brand, links, search, then Pitch) and richer hover states. -->
+  <header class="site-header" data-header data-motion>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Illumexa Solutions — home">
+        <img class="brand__mark" src="../assets/images/logo/illumexa-mark.png" alt="" width="127" height="176" decoding="async">
+        <span class="brand__word" aria-hidden="true">
+          <span class="brand__name">illumexa</span>
+          <span class="brand__sub">SOLUTIONS</span>
+        </span>
+      </a>
+
+      <div class="site-nav__menu" id="site-menu" data-menu>
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="about-us.html">About us</a></li>
+          <li><a class="nav-link" href="services.html">Services</a></li>
+          <li><a class="nav-link" href="#" data-page="investment-models">Investment models</a></li>
+          <li><a class="nav-link" href="#" data-page="portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="contact.html" aria-current="page">Contact us</a></li>
+          <li class="nav-list__cta"><a class="btn btn--lime btn--sm" href="#pitch-form">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </div>
+
+      <div class="site-nav__actions">
+        <button class="nav-search" type="button" aria-label="Search" aria-haspopup="dialog" aria-controls="site-search" data-search-open>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+          <span class="nav-search__label" aria-hidden="true">Search</span>
+        </button>
+        <a class="btn btn--lime btn--sm site-nav__pitch" href="#pitch-form">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-menu-toggle>
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="contact page-top" aria-labelledby="contact-title" data-ambient>
+      <div class="container contact__grid">
+        <!-- ============ PITCH FORM ============ -->
+        <div class="contact__panel contact__panel--pitch" data-glow>
+          <h1 class="contact__title word-reveal" id="contact-title">Launch Your <span class="text-lime">Venture</span></h1>
+          <p class="contact__intro text-reveal">Bridge the gap between strategic intent and technical supremacy. Submit your vision, and our engineering elite will architect the response.</p>
+
+          <!-- Submissions: set data-endpoint to a form backend URL that accepts multipart POSTs.
+               reveal-group: the form rises, its border is traced once, then its fields follow in order. -->
+          <form class="pitch-form reveal-up reveal-group" id="pitch-form" method="post" enctype="multipart/form-data" novalidate data-pitch-form data-endpoint="">
+            <div class="pitch-form__row">
+              <div class="field reveal-item" data-field="name">
+                <label class="field__label" for="pf-name">Full name</label>
+                <div class="field__box">
+                  <input class="field__control" id="pf-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required aria-describedby="pf-name-error">
+                  <span class="field__line" aria-hidden="true"></span>
+                </div>
+                <p class="field__error" id="pf-name-error" data-error-for="name" hidden></p>
+              </div>
+              <div class="field reveal-item" data-field="company">
+                <label class="field__label" for="pf-company">Company</label>
+                <div class="field__box">
+                  <input class="field__control" id="pf-company" name="company" type="text" autocomplete="organization" placeholder="Company name" required aria-describedby="pf-company-error">
+                  <span class="field__line" aria-hidden="true"></span>
+                </div>
+                <p class="field__error" id="pf-company-error" data-error-for="company" hidden></p>
+              </div>
+            </div>
+
+            <div class="field reveal-item" data-field="email">
+              <label class="field__label" for="pf-email">Email</label>
+              <div class="field__box">
+                <input class="field__control" id="pf-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="Your email address" required aria-describedby="pf-email-error">
+                <span class="field__line" aria-hidden="true"></span>
+              </div>
+              <p class="field__error" id="pf-email-error" data-error-for="email" hidden></p>
+            </div>
+
+            <div class="field reveal-item" data-field="deck">
+              <span class="field__label" id="pf-deck-label">Pitch deck</span>
+              <label class="dropzone" for="pf-deck" data-dropzone>
+                <input class="dropzone__input" id="pf-deck" name="deck" type="file" accept="application/pdf,.pdf" required aria-labelledby="pf-deck-label pf-deck-hint" aria-describedby="pf-deck-file pf-deck-error">
+                <span class="dropzone__glow" aria-hidden="true"></span>
+                <svg class="dropzone__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                  <path class="dropzone__arrow" d="M12 18v-6M9 15l3-3 3 3"/>
+                  <path class="dropzone__check" d="m9 15 2 2 4-4" pathLength="1"/>
+                </svg>
+                <span class="dropzone__hint" id="pf-deck-hint" data-dropzone-hint>Drag or <span class="text-lime">upload</span> PDF vision</span>
+                <span class="dropzone__file" id="pf-deck-file" data-dropzone-file></span>
+              </label>
+              <p class="field__error" id="pf-deck-error" data-error-for="deck" hidden></p>
+            </div>
+
+            <div class="pitch-form__action reveal-item">
+              <button class="btn btn--lime pitch-form__submit" type="submit" data-submit>
+                <span class="pitch-form__state" aria-hidden="true">
+                  <span class="pitch-form__spinner"></span>
+                  <svg class="pitch-form__state-icon pitch-form__state-icon--success" focusable="false"><use href="#i-check"/></svg>
+                  <svg class="pitch-form__state-icon pitch-form__state-icon--error" focusable="false"><use href="#i-alert"/></svg>
+                </span>
+                <span class="pitch-form__label" data-submit-label>Initiate Blueprint</span>
+              </button>
+              <p class="pitch-form__status" role="status" data-form-status></p>
+            </div>
+          </form>
+        </div>
+
+        <!-- ============ LOCATIONS ============ -->
+        <!-- The regions Illumexa works across, not places to call on. The three cards enter in
+             order (01 → 03); a rail joins their pins and carries a light between them. Hovering
+             a card lights its rail segments and its region further down. -->
+        <div class="contact__panel contact__panel--presence" data-glow>
+          <h2 class="contact__title char-reveal" id="presence-title">Our Presence</h2>
+          <div class="locations-wrap reveal-group" data-locations>
+            <ul class="locations" role="list" aria-labelledby="presence-title" data-stagger>
+              <li class="reveal-item" data-from="right">
+                <div class="location" data-location="india" data-tilt>
+                  <span class="location__pin" aria-hidden="true"><svg class="icon"><use href="#i-pin"/></svg></span>
+                  <span class="location__text">
+                    <span class="location__name char-reveal">India</span>
+                    <span class="location__coords">12.9716° N, 77.5946° E</span>
+                  </span>
+                  <span class="location__index" aria-hidden="true">01</span>
+                </div>
+              </li>
+              <li class="reveal-item" data-from="right">
+                <div class="location" data-location="europe" data-tilt>
+                  <span class="location__pin" aria-hidden="true"><svg class="icon"><use href="#i-pin"/></svg></span>
+                  <span class="location__text">
+                    <span class="location__name char-reveal">Europe</span>
+                    <span class="location__coords">51.5074° N, 0.1278° W</span>
+                  </span>
+                  <span class="location__index" aria-hidden="true">02</span>
+                </div>
+              </li>
+              <li class="reveal-item" data-from="right">
+                <div class="location" data-location="usa" data-tilt>
+                  <span class="location__pin" aria-hidden="true"><svg class="icon"><use href="#i-pin"/></svg></span>
+                  <span class="location__text">
+                    <span class="location__name char-reveal">USA</span>
+                    <span class="location__coords">37.3875° N, 122.0575° W</span>
+                  </span>
+                  <span class="location__index" aria-hidden="true">03</span>
+                </div>
+              </li>
+            </ul>
+            <svg class="locations__rail" aria-hidden="true" focusable="false" data-rail></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REGIONS ============ -->
+    <!-- Where the design had a world map: the three service regions as a quiet network.
+         Pins sit roughly where the regions lie (USA west, Europe north, India east); the arcs
+         draw in as the section scrolls into view and carry light between the regions. -->
+    <section class="regions" aria-labelledby="regions-title" data-ambient>
+      <h2 class="visually-hidden" id="regions-title">Where we operate</h2>
+      <div class="regions__stage scale-reveal" data-regions>
+        <div class="regions__grid" aria-hidden="true"></div>
+        <div class="regions__glow" aria-hidden="true"></div>
+        <svg class="regions__links" aria-hidden="true" focusable="false" data-region-links></svg>
+        <ol class="regions__list" role="list">
+          <li class="region region--india" data-region="india">
+            <span class="region__node" aria-hidden="true">
+              <span class="region__halo"></span>
+              <span class="region__ripple"></span>
+              <span class="region__dot"></span>
+              <svg class="region__pin" viewBox="0 0 40 52" focusable="false"><use href="#map-pin"/></svg>
+            </span>
+            <span class="region__label">
+              <span class="region__index" aria-hidden="true">01</span>
+              <span class="region__name char-reveal">India</span>
+              <span class="region__coords">12.9716° N, 77.5946° E</span>
+            </span>
+          </li>
+          <li class="region region--europe" data-region="europe">
+            <span class="region__node" aria-hidden="true">
+              <span class="region__halo"></span>
+              <span class="region__ripple"></span>
+              <span class="region__dot"></span>
+              <svg class="region__pin" viewBox="0 0 40 52" focusable="false"><use href="#map-pin"/></svg>
+            </span>
+            <span class="region__label">
+              <span class="region__index" aria-hidden="true">02</span>
+              <span class="region__name char-reveal">Europe</span>
+              <span class="region__coords">51.5074° N, 0.1278° W</span>
+            </span>
+          </li>
+          <li class="region region--usa" data-region="usa">
+            <span class="region__node" aria-hidden="true">
+              <span class="region__halo"></span>
+              <span class="region__ripple"></span>
+              <span class="region__dot"></span>
+              <svg class="region__pin" viewBox="0 0 40 52" focusable="false"><use href="#map-pin"/></svg>
+            </span>
+            <span class="region__label">
+              <span class="region__index" aria-hidden="true">03</span>
+              <span class="region__name char-reveal">USA</span>
+              <span class="region__coords">37.3875° N, 122.0575° W</span>
+            </span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ GLOBAL BLUEPRINT ============ -->
+    <!-- A small technical plate that closes the regions band: the three hubs plotted on the
+         world map with their connections and distances (geo-blueprint.js / .css, shared with
+         About). It draws itself in sequence once a quarter of it is in view. -->
+    <section class="contact-blueprint" aria-labelledby="blueprint-title">
+      <div class="geo-blueprint geo-blueprint--panel" data-geo-blueprint data-ambient data-reveal-threshold="0.25"
+           data-land="../assets/images/world-map.svg"
+           data-hubs="india 12.9716 77.5946; europe 51.5074 -0.1278; usa 37.3875 -122.0575">
+        <div class="geo-blueprint__plate">
+          <p class="geo-blueprint__kicker">Sheet 01 · Global network</p>
+          <h2 class="geo-blueprint__title" id="blueprint-title">Illumexa Global Blueprint</h2>
+          <span class="geo-blueprint__rule" aria-hidden="true"></span>
+          <ul class="geo-blueprint__keys" role="list">
+            <li>
+              <button class="geo-blueprint__key" type="button" data-hub="india" aria-pressed="false">
+                <span class="geo-blueprint__key-index">01</span>
+                <span class="geo-blueprint__key-name">India</span>
+                <span class="geo-blueprint__key-coords">12.97° N · 77.59° E</span>
+              </button>
+            </li>
+            <li>
+              <button class="geo-blueprint__key" type="button" data-hub="europe" aria-pressed="false">
+                <span class="geo-blueprint__key-index">02</span>
+                <span class="geo-blueprint__key-name">Europe</span>
+                <span class="geo-blueprint__key-coords">51.51° N · 0.13° W</span>
+              </button>
+            </li>
+            <li>
+              <button class="geo-blueprint__key" type="button" data-hub="usa" aria-pressed="false">
+                <span class="geo-blueprint__key-index">03</span>
+                <span class="geo-blueprint__key-name">USA</span>
+                <span class="geo-blueprint__key-coords">37.39° N · 122.06° W</span>
+              </button>
+            </li>
+          </ul>
+          <p class="geo-blueprint__meta">Mercator · 3 hubs · 2026</p>
+        </div>
+        <div class="world-map geo-blueprint__stage">
+          <div class="geo-blueprint__grid" aria-hidden="true"></div>
+          <div class="world-map__canvas">
+            <div class="geo-blueprint__land" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <!-- data-motion: the ILLUMEXA outline draws itself as the footer scrolls in, a single light
+       passes through it, and the columns, links and rule reveal in sequence. -->
+  <footer class="site-footer" data-observe data-motion>
+    <svg class="site-footer__outline" viewBox="0 0 4606 1000" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="outline-sweep-fill" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".5" stop-color="#fff"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="outline-sweep" maskUnits="userSpaceOnUse" x="0" y="0" width="4606" height="1000">
+          <rect class="site-footer__sweep" x="-1400" y="0" width="1400" height="1000" fill="url(#outline-sweep-fill)"/>
+        </mask>
+      </defs>
+      <text class="site-footer__outline-text" x="2303" y="849" text-anchor="middle">ILLUMEXA</text>
+      <text class="site-footer__outline-text site-footer__outline-text--light" x="2303" y="849" text-anchor="middle" mask="url(#outline-sweep)">ILLUMEXA</text>
+    </svg>
+
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <p class="site-footer__name word-reveal">ILLUMEXA SOLUTIONS</p>
+        <p class="site-footer__about text-reveal">Architecting the future through strategic capital and technical excellence. The blueprint for modern innovation.</p>
+        <div class="site-footer__social reveal-group" data-stagger>
+          <a class="icon-btn reveal-item" href="index.html" aria-label="Illumexa Solutions website">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg>
+          </a>
+          <button class="icon-btn reveal-item" type="button" aria-label="Share this page" data-share>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-share"/></svg>
+          </button>
+          <span class="visually-hidden" aria-live="polite" data-share-status></span>
+        </div>
+      </div>
+
+      <nav class="site-footer__col" aria-labelledby="footer-quick">
+        <h2 class="site-footer__heading char-reveal" id="footer-quick">Quick Links</h2>
+        <ul class="site-footer__links reveal-group" role="list" data-stagger>
+          <li class="reveal-item"><a href="index.html">Home</a></li>
+          <li class="reveal-item"><a href="services.html">Services</a></li>
+          <li class="reveal-item"><a href="about-us.html">About Us</a></li>
+          <li class="reveal-item"><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-labelledby="footer-legal">
+        <h2 class="site-footer__heading char-reveal" id="footer-legal">Legal</h2>
+        <ul class="site-footer__links reveal-group" role="list" data-stagger>
+          <li class="reveal-item"><a href="#" data-page="privacy">Privacy</a></li>
+          <li class="reveal-item"><a href="#" data-page="terms">Terms</a></li>
+          <li class="reveal-item"><a href="faq.html">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span class="site-footer__rule line-reveal" aria-hidden="true"></span>
+      <div class="container site-footer__bar reveal">
+        <p>© 2026 Illumexa Solutions. The blueprint for innovation.</p>
+        <p class="site-footer__meta"><span>Est. 2026</span><span>Global Ops</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SEARCH ============ -->
+  <dialog class="search" id="site-search" aria-labelledby="search-title" data-search>
+    <h2 class="visually-hidden" id="search-title">Search the site</h2>
+    <form class="search__form" role="search" data-search-form>
+      <img class="search__icon" src="../assets/images/logo/illumexa-mark.png" alt="" width="127" height="176" decoding="async">
+      <label class="visually-hidden" for="search-input">Search services, steps and questions</label>
+      <input class="search__input" id="search-input" type="search" placeholder="Search services, steps, FAQs…" autocomplete="off" spellcheck="false" data-search-input>
+      <button class="search__close" type="button" data-search-close>Esc<span class="visually-hidden"> — close search</span></button>
+    </form>
+    <ul class="search__results" role="list" data-search-results></ul>
+    <p class="visually-hidden" aria-live="polite" data-search-status></p>
+  </dialog>
+</body>
+</html>

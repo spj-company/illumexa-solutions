@@ -1,0 +1,220 @@
+/* ==========================================================================
+   Illumexa — Services in detail (faq.html)
+   1. Detail cards  2. Collapse  3. Responsive
+   ========================================================================== */
+
+/* 1. Detail cards --------------------------------------------------------- */
+.details {
+  --page-top-gap: 47px;
+  padding-bottom: 180px;
+}
+
+.detail-list {
+  display: grid;
+  gap: 112px;
+}
+
+.detail {
+  padding: 81px 57px 55px 41px;
+  background:
+    radial-gradient(28% 34% at 21% 0%, rgba(150, 175, 20, 0.16) 0%, rgba(150, 175, 20, 0) 100%),
+    linear-gradient(135deg, #070707 0%, #121212 46%, #333 100%);
+  transition: box-shadow 450ms var(--ease-out);
+}
+
+/* These cards are whole sections, so they don't lift: a lime edge, the cursor's light
+   (data-glow) and the icon redrawing itself answer the pointer instead. */
+.detail:hover {
+  box-shadow: inset 0 0 0 1px rgba(205, 242, 0, 0.28);
+}
+
+.detail:hover .fx-icon {
+  animation: icon-redraw 900ms var(--ease-out);
+}
+
+.detail .dark-card__icon {
+  transition: filter 450ms var(--ease-out);
+}
+
+.detail:hover .dark-card__icon {
+  filter: drop-shadow(0 0 8px rgba(205, 242, 0, 0.5));
+}
+
+/* Each service's items rise in one after another as they come into view. */
+.detail__list {
+  --stagger: 70ms;
+}
+
+.detail__trigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border-radius: var(--radius-sm);
+}
+
+.detail__title {
+  display: block;
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1rem + 1.2vw, 2.0625rem);
+  font-weight: 500;
+  line-height: 1.24;
+  letter-spacing: -0.02em;
+  color: #efefef;
+  transition: color var(--dur-fast) linear;
+}
+
+.detail__trigger:hover .detail__title {
+  color: var(--c-white);
+}
+
+.detail__chevron {
+  position: absolute;
+  top: 64px;
+  right: 55px;
+  width: 16px;
+  height: 10px;
+  color: var(--c-blue);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+/* The small chevron sits in the card's corner; this strip makes the whole top of
+   the card (chevron included) part of the toggle's hit area. */
+.detail__trigger::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 120px;
+}
+
+.detail__trigger[aria-expanded="false"] .detail__chevron {
+  transform: rotate(180deg);
+}
+
+.detail__list {
+  margin: 44px 0 0;
+}
+
+.detail__item + .detail__item {
+  margin-top: 21px;
+}
+
+.detail__item dt {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--c-white);
+}
+
+.detail__item dd {
+  margin: 12px 0 0;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  line-height: 2.1;
+  color: #e4e4e4;
+}
+
+/* 2. Collapse ------------------------------------------------------------- */
+.js .detail__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows 500ms var(--ease-out),
+    visibility 0s linear 500ms;
+}
+
+.js .detail.is-open .detail__panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows 500ms var(--ease-out),
+    visibility 0s;
+}
+
+.detail__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.detail:not(.is-open) {
+  padding-bottom: 60px;
+}
+
+/* 3. Responsive ----------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .details {
+    padding-bottom: 120px;
+  }
+
+  .detail-list {
+    gap: 48px;
+  }
+
+  .detail {
+    padding: 56px 40px 44px 36px;
+  }
+
+  .detail__chevron {
+    top: 40px;
+    right: 36px;
+  }
+}
+
+@media (max-width: 767px) {
+  .details {
+    --page-top-gap: 32px;
+    padding-bottom: 88px;
+  }
+
+  .detail-list {
+    gap: 20px;
+  }
+
+  .detail {
+    padding: 28px 22px 28px;
+  }
+
+  .detail:not(.is-open) {
+    padding-bottom: 28px;
+  }
+
+  .detail__br {
+    display: none;
+  }
+
+  /* Cards without an icon don't keep an empty slot once stacked. */
+  .detail__trigger > span.dark-card__icon {
+    display: none;
+  }
+
+  span.dark-card__icon + .detail__title {
+    margin-top: 0;
+  }
+
+  .detail__title {
+    margin-top: 18px;
+    padding-right: 36px;
+    font-size: 1.375rem;
+  }
+
+  .detail__chevron {
+    top: 34px;
+    right: 22px;
+  }
+
+  .detail__list {
+    margin-top: 24px;
+  }
+
+  .detail__item + .detail__item {
+    margin-top: 18px;
+  }
+
+  .detail__item dd {
+    margin-top: 6px;
+    line-height: 1.8;
+  }
+}

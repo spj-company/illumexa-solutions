@@ -1,0 +1,1246 @@
+/* ==========================================================================
+   Illumexa — Contact page
+   1. Canvas & panels  2. Pitch form  3. Submit button  4. Locations
+   5. Regions  6. Motion  7. Responsive
+   ========================================================================== */
+
+/* 1. Canvas & panels ------------------------------------------------------ */
+/* The whole Contact page is one continuous black canvas, regions and footer included.
+   Surfaces step up to #0a0a0a with #1a1a1a edges; lime is the only colour. */
+body {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.contact {
+  --page-top-gap: 110px;
+  overflow-x: clip; /* the pointer light and entering cards may pass the panels, never the page */
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 576px));
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.contact__panel {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.contact__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.4rem + 2.2vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.05em;
+}
+
+.contact__intro {
+  max-width: 500px;
+  margin-top: 26px;
+  font-size: clamp(1rem, 0.92rem + 0.25vw, 1.125rem);
+  line-height: 1.56;
+  color: #c4c4c4;
+}
+
+/* 2. Pitch form ----------------------------------------------------------- */
+/* Surfaces are slightly translucent (#0a0a0a on black) so the panel's pointer light shows through. */
+.pitch-form {
+  position: relative;
+  display: grid;
+  gap: 27px;
+  margin-top: 28px;
+  padding: 74px 49px 64px;
+  border: 1px solid #1a1a1a;
+  border-radius: var(--radius-sm);
+  background: rgba(14, 14, 14, 0.72);
+}
+
+.pitch-form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.field {
+  display: grid;
+  gap: 9px;
+  align-content: start;
+}
+
+.field__label {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #d4d4d4;
+  transition:
+    color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out);
+}
+
+.field:focus-within .field__label {
+  color: var(--c-lime);
+  transform: translateX(3px);
+}
+
+.field__box {
+  position: relative;
+}
+
+.field__control {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  background: #111;
+  color: var(--c-white);
+  font: 400 1rem/1.2 var(--font-body);
+  transition:
+    border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    box-shadow 450ms var(--ease-out);
+}
+
+.field__control::placeholder {
+  color: #7d7d7d;
+  transition: color var(--dur) var(--ease-out);
+}
+
+.field__control:hover {
+  border-color: #3b3b3b;
+}
+
+.field__control:focus {
+  outline: none;
+  border-color: rgba(205, 242, 0, 0.65);
+  background-color: #131313;
+  box-shadow:
+    0 0 0 3px rgba(205, 242, 0, 0.12),
+    0 10px 30px -14px rgba(205, 242, 0, 0.55);
+}
+
+.field__control:focus::placeholder {
+  color: #5f5f5f;
+}
+
+/* A lit edge draws out from the centre along the bottom of the active field. */
+.field__line {
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  left: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(205, 242, 0, 0), var(--c-lime) 25%, var(--c-lime-bright) 50%, var(--c-lime) 75%, rgba(205, 242, 0, 0));
+  box-shadow: 0 0 10px rgba(205, 242, 0, 0.55);
+  opacity: 0;
+  transform: scaleX(0);
+  transition:
+    transform 550ms var(--ease-out),
+    opacity var(--dur-fast) linear;
+  pointer-events: none;
+}
+
+.field__box:focus-within .field__line {
+  opacity: 1;
+  transform: none;
+}
+
+.field.has-error .field__control,
+.field.has-error .dropzone {
+  border-color: #ff7a6b;
+}
+
+.field.has-error .field__line {
+  opacity: 0;
+}
+
+.field__error {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #ff9d91;
+}
+
+.field__error:not([hidden]) {
+  animation: message-in 320ms var(--ease-out);
+}
+
+.dropzone {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
+  min-height: 162px;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px dashed #3a3a3a;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) linear,
+    background-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out);
+}
+
+.dropzone:hover,
+.dropzone.is-dragging {
+  border-color: var(--c-lime);
+  background: rgba(205, 242, 0, 0.05);
+}
+
+/* Dragging a file over the zone: the edge firms up and the zone leans in to receive it. */
+.dropzone.is-dragging {
+  border-style: solid;
+  box-shadow:
+    inset 0 0 0 1px rgba(205, 242, 0, 0.5),
+    0 0 0 4px rgba(205, 242, 0, 0.08);
+  transform: scale(1.012);
+}
+
+.dropzone.has-file {
+  border-style: solid;
+  border-color: rgba(205, 242, 0, 0.45);
+  background: rgba(205, 242, 0, 0.035);
+}
+
+.dropzone__glow {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  z-index: -1;
+  width: 240px;
+  height: 240px;
+  margin: -120px 0 0 -120px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(205, 242, 0, 0.16), rgba(205, 242, 0, 0));
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 600ms var(--ease-out);
+  pointer-events: none;
+}
+
+.dropzone:hover .dropzone__glow,
+.dropzone.is-dragging .dropzone__glow {
+  opacity: 1;
+  transform: none;
+}
+
+/* The native file input stays in the tab order but is visually replaced by the zone. */
+.dropzone__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dropzone:has(.dropzone__input:focus-visible) {
+  outline: 2px solid var(--c-lime);
+  outline-offset: 3px;
+}
+
+.dropzone__icon {
+  width: 30px;
+  height: 30px;
+  color: var(--c-lime);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.dropzone:hover .dropzone__icon,
+.dropzone.is-dragging .dropzone__icon {
+  transform: translateY(-3px);
+}
+
+/* Upload arrow: rises and re-enters while the zone is hovered or a file hovers over it. */
+.dropzone__arrow {
+  transition: opacity var(--dur-fast) linear;
+}
+
+.dropzone:hover .dropzone__arrow,
+.dropzone.is-dragging .dropzone__arrow {
+  animation: arrow-rise 1500ms var(--ease-in-out) infinite;
+}
+
+.dropzone.is-dragging .dropzone__arrow {
+  animation-duration: 900ms;
+}
+
+.dropzone__check {
+  opacity: 0;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.dropzone.has-file .dropzone__arrow {
+  opacity: 0;
+  animation: none;
+}
+
+.dropzone.has-file .dropzone__check {
+  opacity: 1;
+  stroke-dashoffset: 0;
+  transition:
+    stroke-dashoffset 500ms var(--ease-out) 120ms,
+    opacity 100ms linear;
+}
+
+.dropzone__hint {
+  font-size: 0.9375rem;
+  color: #cfcfcf;
+}
+
+.dropzone__file {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--c-white);
+  word-break: break-word;
+  animation: message-in 400ms var(--ease-out);
+}
+
+.dropzone__file:empty {
+  display: none;
+}
+
+.pitch-form__action {
+  display: grid;
+  gap: 27px;
+}
+
+.pitch-form__status {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #d6d6d6;
+}
+
+.pitch-form__status.is-new {
+  animation: message-in 400ms var(--ease-out);
+}
+
+.pitch-form__status:empty {
+  display: none;
+}
+
+.pitch-form__status[data-state="success"] {
+  color: var(--c-lime);
+}
+
+.pitch-form__status[data-state="error"] {
+  color: #ff9d91;
+}
+
+/* 3. Submit button -------------------------------------------------------- */
+.pitch-form__submit {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  height: 58px;
+  margin-top: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  box-shadow: 0 0 26px -2px rgba(205, 242, 0, 0.45);
+}
+
+/* A band of light that crosses the button once per hover, and loops while sending. */
+.pitch-form__submit::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 38%;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0));
+  transform: translateX(-160%) skewX(-18deg);
+  pointer-events: none;
+}
+
+.pitch-form__submit:hover:not([aria-disabled="true"]) {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 14px 34px -14px rgba(205, 242, 0, 0.8),
+    0 0 34px -4px rgba(205, 242, 0, 0.5);
+}
+
+.pitch-form__submit:hover:not([aria-disabled="true"])::after {
+  animation: shine-pass 1000ms var(--ease-in-out);
+}
+
+.pitch-form__submit:active:not([aria-disabled="true"]) {
+  transform: scale(0.985);
+  box-shadow: 0 0 16px -4px rgba(205, 242, 0, 0.5);
+  transition-duration: 120ms;
+}
+
+.pitch-form__submit[aria-disabled="true"] {
+  cursor: progress;
+}
+
+.pitch-form__submit[data-state="loading"]::after {
+  animation: shine-pass 1300ms var(--ease-in-out) infinite;
+}
+
+.pitch-form__state {
+  display: none;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+.pitch-form__submit[data-state] .pitch-form__state {
+  display: grid;
+}
+
+.pitch-form__spinner,
+.pitch-form__state-icon {
+  display: none;
+  grid-area: 1 / 1;
+}
+
+.pitch-form__submit[data-state="loading"] .pitch-form__spinner {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(11, 11, 11, 0.22);
+  border-top-color: var(--c-ink);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+.pitch-form__submit[data-state="success"] .pitch-form__state-icon--success,
+.pitch-form__submit[data-state="error"] .pitch-form__state-icon--error {
+  display: block;
+  width: 18px;
+  height: 18px;
+  animation: state-pop 450ms var(--ease-out) both;
+}
+
+.pitch-form__label.is-new {
+  animation: label-in 420ms var(--ease-out) both;
+}
+
+/* 4. Locations ------------------------------------------------------------ */
+.locations-wrap {
+  position: relative;
+}
+
+.locations {
+  display: grid;
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.locations > li {
+  display: flex;
+}
+
+.location {
+  --lift: 0px;
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 26px;
+  min-height: 101px;
+  padding: 20px 24px;
+  border: 1px solid #1a1a1a;
+  border-radius: var(--radius-sm);
+  background: rgba(14, 14, 14, 0.72);
+  transform: perspective(900px) translateY(var(--lift)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition:
+    border-color 400ms var(--ease-out),
+    box-shadow 400ms var(--ease-out),
+    transform 400ms var(--ease-out);
+}
+
+/* Light pooling behind the pin (a gradient, so it fades in rather than transitions). */
+.location::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(220px circle at 48px 50%, rgba(205, 242, 0, 0.13), rgba(205, 242, 0, 0) 70%);
+  opacity: 0;
+  transition: opacity 450ms var(--ease-out);
+}
+
+/* .is-hot: its region is hovered further down the page. */
+.location:hover,
+.location.is-hot {
+  --lift: -3px;
+  border-color: rgba(205, 242, 0, 0.55);
+  box-shadow: 0 16px 34px -22px rgba(205, 242, 0, 0.4);
+}
+
+.location:hover::before,
+.location.is-hot::before {
+  opacity: 1;
+}
+
+.location__pin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--c-lime);
+  border-radius: 50%;
+  background: #1a1f02;
+  color: var(--c-lime);
+  font-size: 18px;
+  transition:
+    background-color 400ms var(--ease-out),
+    box-shadow 400ms var(--ease-out);
+}
+
+.location:hover .location__pin,
+.location.is-hot .location__pin {
+  box-shadow: 0 0 20px -2px rgba(205, 242, 0, 0.6);
+}
+
+/* A slow ring keeps leaving the icon while the card is hovered. */
+.location__pin::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 1.5px solid var(--c-lime);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.location:hover .location__pin::after,
+.location.is-hot .location__pin::after {
+  animation: ring-out 1600ms var(--ease-out) infinite;
+}
+
+.location__text {
+  display: grid;
+  gap: 4px;
+  transition: transform 450ms var(--ease-expo);
+}
+
+.location:hover .location__text,
+.location.is-hot .location__text {
+  transform: translateX(4px);
+}
+
+.location__name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--c-white);
+}
+
+.location__coords {
+  font-size: 0.9375rem;
+  color: #bdbdbd;
+  font-variant-numeric: tabular-nums;
+  transition: color 400ms var(--ease-out);
+}
+
+.location:hover .location__coords,
+.location.is-hot .location__coords {
+  color: #ececec;
+}
+
+/* Order number, pinned to the corner so it never takes room from the coordinates. */
+.location__index {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #4a4a4a;
+  font-variant-numeric: tabular-nums;
+  transition: color 400ms var(--ease-out);
+}
+
+.location:hover .location__index,
+.location.is-hot .location__index {
+  color: var(--c-lime);
+}
+
+/* The rail: segments between neighbouring pins (drawn by contact-locations.js), each
+   drawing in after the cards land and then carrying a light from one pin to the next. */
+.locations__rail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.rail-line,
+.rail-pulse {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.rail-line {
+  stroke: rgba(205, 242, 0, 0.3);
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  transition: stroke 400ms var(--ease-out);
+}
+
+/* One short dash per line (the pattern's period is over twice the line), resting just
+   before its start until it runs; see pulse-travel. */
+.rail-pulse {
+  --pulse-len: 0.16;
+  stroke: var(--c-lime-bright);
+  stroke-width: 2;
+  stroke-dasharray: var(--pulse-len) 2;
+  stroke-dashoffset: var(--pulse-len);
+  filter: drop-shadow(0 0 4px rgba(205, 242, 0, 0.9));
+  animation: pulse-travel 3600ms linear infinite;
+  animation-delay: calc(2400ms + var(--seg, 0) * 1800ms);
+}
+
+.rail-line.is-hot {
+  stroke: rgba(205, 242, 0, 0.85);
+}
+
+.js .locations-wrap:not(.is-visible) .rail-line {
+  stroke-dashoffset: 1;
+}
+
+.js .locations-wrap.is-visible .rail-line {
+  animation: line-draw 900ms var(--ease-in-out) backwards;
+  animation-delay: calc(var(--rail-delay, 1300ms) + var(--seg, 0) * 260ms);
+}
+
+/* 5. Regions -------------------------------------------------------------- */
+/* Where the design had a world map: the three service regions as a quiet network on the
+   black canvas. Pins keep the design's positions (USA west, Europe north, India east). */
+.regions {
+  margin-top: 175px;
+}
+
+.regions__stage {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1440 / 830;
+  max-height: 830px;
+  background: var(--c-black);
+}
+
+/* A faint dot field, fading out toward the edges. */
+.regions__grid {
+  position: absolute;
+  inset: -80px 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.085) 1px, transparent 1.5px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 25%, transparent 75%);
+  pointer-events: none;
+}
+
+.regions__glow {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  width: 70%;
+  aspect-ratio: 3 / 2;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(205, 242, 0, 0.1), rgba(205, 242, 0, 0.03) 55%, rgba(205, 242, 0, 0));
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.regions__links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.link-line,
+.link-pulse {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.link-line {
+  stroke: rgba(205, 242, 0, 0.28);
+  stroke-width: 1.2;
+  stroke-dasharray: 1;
+  transition: stroke 450ms var(--ease-out);
+}
+
+.link-line--faint {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-dasharray: 0.004 0.012;
+}
+
+.link-line.is-hot {
+  stroke: rgba(205, 242, 0, 0.8);
+}
+
+.link-line--faint.is-hot {
+  stroke: rgba(205, 242, 0, 0.45);
+}
+
+.link-pulse {
+  --pulse-len: 0.07;
+  stroke: var(--c-lime-bright);
+  stroke-width: 2.4;
+  stroke-dasharray: var(--pulse-len) 2;
+  stroke-dashoffset: var(--pulse-len);
+  filter: drop-shadow(0 0 5px rgba(205, 242, 0, 0.9));
+  animation: pulse-travel 4200ms linear infinite;
+  animation-delay: calc(1800ms + var(--seg, 0) * 2100ms);
+}
+
+.regions__list {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+/* Each region is a zero-size anchor on its point; pin above, light on it, label below. */
+.region {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: 0;
+  height: 0;
+}
+
+.region--usa { --x: 22%; --y: 54%; --reveal-delay: 700ms; }
+.region--europe { --x: 51%; --y: 37%; --reveal-delay: 500ms; }
+.region--india { --x: 76%; --y: 61%; --reveal-delay: 300ms; }
+
+.region__node {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.region__halo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 64px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(205, 242, 0, 0.42), rgba(205, 242, 0, 0));
+  translate: -50% -50%;
+  transition: scale 450ms var(--ease-out);
+}
+
+.region__ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 12px;
+  border: 1.5px solid rgba(205, 242, 0, 0.7);
+  border-radius: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+  animation: ripple-out 2800ms var(--ease-out) infinite;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 1200ms);
+}
+
+.region__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-lime);
+  box-shadow:
+    0 0 0 3px rgba(205, 242, 0, 0.18),
+    0 0 12px rgba(205, 242, 0, 0.6);
+  translate: -50% -50%;
+}
+
+/* The pin floats a few pixels (translate) while hover scales it (transform). */
+.region__pin {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 34px;
+  max-width: none; /* the anchor is zero-width, so the global 100% cap would hide it */
+  height: auto;
+  margin-left: -17px;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0 10px rgba(205, 242, 0, 0.35));
+  animation: pin-float 6000ms var(--ease-in-out) infinite alternate;
+  animation-delay: calc(var(--reveal-delay, 0ms) * -3);
+  transition:
+    transform 450ms var(--ease-expo),
+    filter 450ms var(--ease-out);
+}
+
+.region__label {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr; /* name sits right after its number */
+  align-items: baseline;
+  column-gap: 10px;
+  row-gap: 4px;
+  width: max-content; /* the anchor is zero-width */
+  padding: 10px 16px 11px;
+  border: 1px solid #1f1f1f;
+  border-radius: var(--radius-sm);
+  background: rgba(8, 8, 8, 0.82);
+  translate: -50% 0;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition:
+    border-color 450ms var(--ease-out),
+    box-shadow 450ms var(--ease-out);
+}
+
+.region__index {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--c-lime);
+  font-variant-numeric: tabular-nums;
+}
+
+.region__name {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+.region__coords {
+  grid-column: 1 / -1;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: #8c8c8c;
+  font-variant-numeric: tabular-nums;
+  transition: color 450ms var(--ease-out);
+}
+
+.region.is-hot .region__pin {
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 16px rgba(205, 242, 0, 0.65));
+}
+
+.region.is-hot .region__halo {
+  scale: 1.5;
+}
+
+.region.is-hot .region__label {
+  border-color: rgba(205, 242, 0, 0.55);
+  box-shadow: 0 0 28px -8px rgba(205, 242, 0, 0.45);
+}
+
+.region.is-hot .region__coords {
+  color: #d6d6d6;
+}
+
+/* Regions enter in order 01 → 03 once the stage arrives: the pin drops onto its point,
+   then the label rises beneath it. */
+.js .regions__stage:not(.is-visible) :is(.region__node, .region__label) {
+  opacity: 0;
+}
+
+.js .regions__stage.is-visible .region__node {
+  animation: node-drop 1000ms var(--ease-expo) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.js .regions__stage.is-visible .region__label {
+  animation: reveal-up 1000ms var(--ease-expo) backwards;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 180ms);
+}
+
+/* Letters of the region name start once its label has begun to rise
+   (one --stagger step after the region's own delay). */
+.region__name {
+  --i: 1;
+  --stagger: 260ms;
+}
+
+/* Ambient loops run only while their section is on screen. */
+.contact:not(.is-in-view) .rail-pulse,
+.regions:not(.is-in-view) :is(.link-pulse, .region__ripple, .region__pin) {
+  animation-play-state: paused;
+}
+
+/* 5b. Global blueprint ---------------------------------------------------- */
+/* A small plate that closes the regions band (geo-blueprint.css). It rises into the empty
+   foot of the stage, below the lowest label, so it reads as part of the same section. */
+.contact-blueprint {
+  /* Rise = 72px under the lowest region label; the stage's foot grows with its width. */
+  --blueprint-rise: max(-166px, calc(156px - 22.36vw));
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 2 * var(--gutter)));
+  margin: var(--blueprint-rise) auto clamp(32px, 4.5vw, 64px);
+}
+
+@media (max-width: 1023px) {
+  .contact-blueprint {
+    --blueprint-rise: calc(157px - 26.05vw);
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-blueprint {
+    --blueprint-rise: 0px;
+  }
+}
+
+/* 6. Motion --------------------------------------------------------------- */
+/* Load sequence (desktop): header, then the headline word by word, the intro wipe, the
+   form rising with its border traced and fields in order; the Presence column follows with
+   its title letter by letter, cards 01 → 03 from the right, and the rail between them. */
+.contact__panel--pitch .contact__title { --reveal-delay: 300ms; }
+.contact__intro { --reveal-delay: 620ms; }
+.pitch-form { --reveal-delay: 760ms; }
+
+.pitch-form .reveal-item {
+  --reveal-delay: 950ms;
+  --stagger: 85ms;
+}
+
+.pitch-form [data-field="company"] { --i: 1; }
+.pitch-form [data-field="email"] { --i: 2; }
+.pitch-form [data-field="deck"] { --i: 3; }
+.pitch-form .pitch-form__action { --i: 4; }
+
+.contact__panel--presence .contact__title { --reveal-delay: 460ms; }
+
+.locations-wrap {
+  --reveal-delay: 640ms;
+  --stagger: 140ms;
+}
+
+.location__name.char-reveal {
+  --reveal-delay: 900ms;
+}
+
+/* The form's border is traced once by a travelling light, then settles back to its hairline. */
+@property --trace {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.pitch-form::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from 200deg, rgba(205, 242, 0, 0) 0deg, rgba(205, 242, 0, 0.9) var(--trace), rgba(205, 242, 0, 0) var(--trace));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude; /* only the 1px ring between the two layers shows */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.js .pitch-form.is-visible::before {
+  animation: border-trace 1800ms var(--ease-in-out) both;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 350ms);
+}
+
+/* Scroll-linked depth, desktop only: the headline travels a little faster than the page and
+   the Presence column a little slower; in the regions the dot field and glow lag behind the
+   pins, and the arcs draw as the stage scrolls in. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .regions__stage {
+      view-timeline-name: --regions;
+    }
+
+    .link-line:not(.link-line--faint) {
+      animation: line-draw linear both;
+      animation-timeline: --regions;
+      animation-range: entry 35% cover 55%;
+    }
+
+    .link-line--faint {
+      animation: reveal-fade linear both;
+      animation-timeline: --regions;
+      animation-range: entry 70% cover 60%;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    .contact__panel--pitch .contact__title {
+      animation: drift-up linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 700px;
+    }
+
+    .contact__panel--presence {
+      animation: drift-down linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 900px;
+    }
+
+    .regions__grid {
+      animation: parallax-grid linear both;
+      animation-timeline: --regions;
+    }
+
+    .regions__glow {
+      animation: parallax-glow linear both;
+      animation-timeline: --regions;
+    }
+  }
+}
+
+/* Without scroll-driven animation, the arcs draw once when the stage arrives. */
+@supports not (animation-timeline: view()) {
+  .js .regions__stage:not(.is-visible) .link-line:not(.link-line--faint) {
+    stroke-dashoffset: 1;
+  }
+
+  .js .regions__stage:not(.is-visible) .link-line--faint {
+    opacity: 0;
+  }
+
+  .js .regions__stage.is-visible .link-line:not(.link-line--faint) {
+    animation: line-draw 1600ms var(--ease-in-out) backwards;
+    animation-delay: calc(900ms + var(--seg, 0) * 300ms);
+  }
+
+  .js .regions__stage.is-visible .link-line--faint {
+    animation: reveal-fade 1200ms var(--ease-out) 1800ms backwards;
+  }
+}
+
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes label-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes state-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-15deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes arrow-rise {
+  0% { opacity: 1; transform: translateY(0); }
+  45% { opacity: 0; transform: translateY(-5px); }
+  55% { opacity: 0; transform: translateY(5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ring-out {
+  from {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+@keyframes border-trace {
+  0% { --trace: 0deg; opacity: 1; }
+  78% { --trace: 360deg; opacity: 1; }
+  100% { --trace: 360deg; opacity: 0; }
+}
+
+@keyframes line-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* A short bright dash runs from just before a line's start to just past its end, then
+   waits there, out of sight, for the rest of the cycle. */
+@keyframes pulse-travel {
+  0% { stroke-dashoffset: var(--pulse-len); }
+  50%, 100% { stroke-dashoffset: -1; }
+}
+
+@keyframes node-drop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -26px, 0);
+  }
+}
+
+@keyframes ripple-out {
+  0% { opacity: 0.9; scale: 0.6; }
+  70%, 100% { opacity: 0; scale: 2.8; }
+}
+
+@keyframes pin-float {
+  from { translate: 0 0; }
+  to { translate: 0 -4px; }
+}
+
+@keyframes drift-up {
+  to { translate: 0 -26px; }
+}
+
+@keyframes drift-down {
+  to { translate: 0 44px; }
+}
+
+@keyframes parallax-grid {
+  from { translate: 0 -40px; }
+  to { translate: 0 40px; }
+}
+
+@keyframes parallax-glow {
+  from { translate: 0 -90px; }
+  to { translate: 0 90px; }
+}
+
+/* 7. Responsive ----------------------------------------------------------- */
+@media (max-width: 1023px) {
+  /* Stacked, each part arrives as it scrolls in: shorter travel, no waiting on the form. */
+  .contact,
+  .regions {
+    --reveal-shift: 20px;
+  }
+
+  .contact {
+    --page-top-gap: 56px;
+  }
+
+  .contact__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 56px;
+  }
+
+  /* Once the panels span the page, give their text room from the black edge. */
+  .contact__panel {
+    padding: 32px 28px 28px;
+    border-radius: var(--radius-sm);
+  }
+
+  .contact__panel--presence .contact__title { --reveal-delay: 0ms; }
+
+  .locations-wrap {
+    --reveal-delay: 120ms;
+    --rail-delay: 700ms;
+  }
+
+  .location__name.char-reveal {
+    --reveal-delay: 350ms;
+  }
+
+  .regions {
+    margin-top: 96px;
+  }
+
+  .regions__stage {
+    aspect-ratio: 1440 / 962;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Lighter still on phones: short travel and little blur. */
+  .contact,
+  .regions,
+  .site-footer {
+    --reveal-shift: 14px;
+    --reveal-blur: 2px;
+  }
+
+  .contact {
+    --page-top-gap: 32px;
+  }
+
+  .contact__panel {
+    padding: 26px 16px 16px;
+  }
+
+  .pitch-form {
+    padding: 28px 16px 24px;
+  }
+
+  .locations {
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .location {
+    min-height: 0;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .location__index {
+    top: 12px;
+    right: 14px;
+  }
+
+  .regions {
+    margin-top: 64px;
+  }
+
+  /* Regions stack in a zigzag down the phone: 01 top right, 02 middle left, 03 bottom right. */
+  .regions__stage {
+    aspect-ratio: auto;
+    height: 540px;
+  }
+
+  .region--india { --x: 66%; --y: 17%; }
+  .region--europe { --x: 34%; --y: 47%; }
+  .region--usa { --x: 64%; --y: 77%; }
+
+  .region__pin {
+    width: 28px;
+    margin-left: -14px;
+  }
+
+  .region__label {
+    padding: 8px 12px 9px;
+  }
+}
+
+@media (max-width: 479px) {
+  .pitch-form__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 27px;
+  }
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Illumexa Solutions | Capital, Market Access &amp; Mentorship</title>
+  <meta name="description" content="Illumexa Solutions backs early-stage founders with ₹10 Lakhs to ₹1 Crore in capital, market access across India, the US and Europe, and hands-on mentorship.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Cg transform='rotate(32 16 16)'%3E%3Crect x='12' y='4' width='8' height='12' rx='4' fill='%23cdf200'/%3E%3Crect x='14' y='16' width='8' height='12' rx='4' fill='%23cdf200'/%3E%3C/g%3E%3C/svg%3E">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Illumexa Solutions">
+  <meta property="og:title" content="Illumexa Solutions | We Back Founders Who Build What Matters">
+  <meta property="og:description" content="Capital, market access and mentorship for ambitious founders building meaningful companies.">
+  <meta property="og:image" content="../assets/images/hero-poster.jpg">
+
+  <link rel="preload" href="../assets/fonts/poppins-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/images/hero-poster.jpg" as="image" fetchpriority="high">
+  <link rel="preload" href="../assets/images/logo/illumexa-mark.png" as="image" fetchpriority="high">
+
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/home.css">
+
+  <script>
+    // Gate the reveal styles on JS (dropped again if the scripts never run), and open the
+    // page with the intro on the first page of a visit, or a short veil after that.
+    (function (root) {
+      root.classList.add('js');
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add(sessionStorage.getItem('illumexa-visited') ? 'is-arriving' : 'is-intro');
+          sessionStorage.setItem('illumexa-visited', '1');
+        }
+      } catch (error) {}
+      setTimeout(function () {
+        if (!window.illumexaReady) root.classList.remove('js');
+      }, 3000);
+    })(document.documentElement);
+  </script>
+  <script src="scripts/main.js" defer></script>
+  <script src="scripts/home.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite (kept renderable, not display:none, as the sprites that hold gradients need it) -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>
+    </symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12h15M13 6l6 6-6 6"/>
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round">
+      <path d="M12 5.5v13M5.5 12h13"/>
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/>
+    </symbol>
+    <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/>
+    </symbol>
+
+    <symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/>
+    </symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.1 5.4-5.4 2.1 2.1-5.4z"/>
+    </symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" data-header data-motion>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Illumexa Solutions — home">
+        <img class="brand__mark" src="../assets/images/logo/illumexa-mark.png" alt="" width="127" height="176" decoding="async">
+        <span class="brand__word" aria-hidden="true">
+          <span class="brand__name">illumexa</span>
+          <span class="brand__sub">SOLUTIONS</span>
+        </span>
+      </a>
+
+      <div class="site-nav__menu" id="site-menu" data-menu>
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html" aria-current="page">Home</a></li>
+          <li><a class="nav-link" href="about-us.html">About us</a></li>
+          <li><a class="nav-link" href="services.html">Services</a></li>
+          <li><a class="nav-link" href="#" data-page="investment-models">Investment models</a></li>
+          <li><a class="nav-link" href="#" data-page="portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="contact.html">Contact us</a></li>
+          <li class="nav-list__cta"><a class="btn btn--lime btn--sm" href="contact.html">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </div>
+
+      <div class="site-nav__actions">
+        <button class="nav-search" type="button" aria-label="Search" aria-haspopup="dialog" aria-controls="site-search" data-search-open>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+          <span class="nav-search__label" aria-hidden="true">Search</span>
+        </button>
+        <a class="btn btn--lime btn--sm site-nav__pitch" href="contact.html">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-menu-toggle>
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="hero-title" data-parallax-scope data-ambient>
+      <!-- Autoplays from the markup alone (muted, looped, inline; the phone-sized file on
+           narrow screens); home.js only keeps it running — see initHeroVideo. -->
+      <video class="hero__video" poster="../assets/images/hero-poster.jpg" autoplay muted loop playsinline preload="metadata" disablepictureinpicture aria-hidden="true" data-hero-video>
+        <source src="../assets/videos/spotlight-bg-480.mp4" type="video/mp4" media="(max-width: 767px)">
+        <source src="../assets/videos/spotlight-bg.mp4" type="video/mp4">
+      </video>
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <!-- Soft focus behind the copy only: blurs the film beneath the text column and fades
+           out before the city, so the rest of the video stays sharp. -->
+      <div class="hero__focus" aria-hidden="true"></div>
+
+      <div class="hero__content hero-exit">
+        <p class="badge hero__badge"><span class="badge__dot" aria-hidden="true"></span>Capital · Market Access · Mentorship</p>
+        <h1 class="hero__title word-reveal" id="hero-title">
+          <span class="hero__line"><span>We Back Founders</span></span>
+          <span class="hero__line"><span>Who Build</span></span>
+          <span class="hero__line"><span><em class="text-lime">What Matters</em></span></span>
+        </h1>
+        <p class="hero__text text-reveal">Capital from ₹10 Lakhs to ₹1 Crore, market access across India, the United States and Europe, and hands-on mentorship — for founders building businesses with lasting value.</p>
+        <div class="hero__actions reveal-group" data-stagger>
+          <a class="btn btn--lime btn--hero reveal-item" href="contact.html">Pitch to us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+          <a class="btn btn--ghost btn--hero reveal-item" href="#process">See how it works</a>
+        </div>
+      </div>
+
+      <a class="hero__scroll" href="#why">Scroll to explore</a>
+    </section>
+
+    <!-- ============ WHY CHOOSE ============ -->
+    <!-- The intro is a two-column statement; the three commitments follow as a flat,
+         rule-topped grid (01 / 02 / 03) rather than cards. -->
+    <section class="why" id="why" aria-labelledby="why-title" data-ambient data-parallax-scope data-observe data-seam>
+      <div class="home-container why__intro" data-stagger>
+        <div class="why__lead">
+          <p class="eyebrow eyebrow--dash wipe-reveal">Why choose Illumexa</p>
+          <h2 class="why__title word-reveal scroll-grow" id="why-title">The right investment partner should contribute more than capital.</h2>
+        </div>
+        <div class="why__text text-reveal">
+          <p>At Illumexa Solutions, we work alongside founders, building long-term relationships based on trust, collaboration, and a shared commitment to sustainable growth. Our focus is on helping entrepreneurs overcome challenges, unlock opportunities, and build businesses with lasting value.</p>
+          <p>Every investment is built on three commitments: <strong>Capital</strong> to build, <strong>Market Access</strong> to scale, and <strong>Mentorship</strong> to guide founders through every stage of building, growing, and scaling successful businesses with confidence.</p>
+        </div>
+      </div>
+
+      <ul class="home-container why__features" role="list" data-stagger data-search-type="Why Illumexa">
+        <li class="feature card-reveal">
+          <div class="feature__head">
+            <span class="feature__index" aria-hidden="true">01</span>
+            <span class="feature__icon" aria-hidden="true"><svg class="icon fx-icon"><use href="#i-cash"/></svg></span>
+          </div>
+          <h3 class="feature__title">Capital</h3>
+          <p class="feature__text">Capital is the foundation of every successful venture. We invest ₹10 Lakhs to ₹1 Crore to help founders transform innovative ideas into scalable businesses. Our investment provides more than funding by supporting long-term growth from the very beginning.</p>
+          <p class="feature__note">₹10 Lakhs – ₹1 Crore per investment</p>
+        </li>
+        <li class="feature card-reveal">
+          <div class="feature__head">
+            <span class="feature__index" aria-hidden="true">02</span>
+            <span class="feature__icon" aria-hidden="true"><svg class="icon fx-icon"><use href="#i-globe"/></svg></span>
+          </div>
+          <h3 class="feature__title">Market Access</h3>
+          <p class="feature__text">Access to the right market is essential for sustainable growth. We connect founders with opportunities across India, the United States, and Europe, enabling them to expand into new markets, build strategic partnerships, and accelerate business growth.</p>
+          <p class="feature__note">India · United States · Europe</p>
+        </li>
+        <li class="feature card-reveal">
+          <div class="feature__head">
+            <span class="feature__index" aria-hidden="true">03</span>
+            <span class="feature__icon" aria-hidden="true"><svg class="icon fx-icon"><use href="#i-compass"/></svg></span>
+          </div>
+          <h3 class="feature__title">Mentorship</h3>
+          <p class="feature__text">Great businesses are built with the right guidance. We connect founders with experienced mentors who provide strategic insights and practical expertise to help them overcome challenges, make informed decisions, and build scalable, sustainable businesses.</p>
+          <p class="feature__note">Experienced mentors at every stage</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ HOW IT WORKS + IMPACT ============ -->
+    <!-- A lit corner behind the intro; the three steps are a rule-divided list with large
+         lime numerals (each rule draws in as its step arrives, then a light runs down them);
+         the four figures count up once under a rule. -->
+    <section class="process" id="process" aria-labelledby="process-title" data-ambient data-parallax-scope data-observe data-seam>
+      <div class="process__glow parallax" aria-hidden="true"></div>
+      <svg class="process__trace parallax" viewBox="0 0 1440 1200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" data-draw>
+        <path d="M620 0C640 160 700 300 790 400 880 500 1000 560 1120 640 1240 720 1330 820 1440 1020" fill="none" stroke="#cdf200" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round" opacity=".45"/>
+        <path d="M860 0C850 120 880 230 950 310 1020 390 1130 430 1250 500 1340 560 1400 650 1440 760" fill="none" stroke="#cdf200" stroke-width="1" stroke-dasharray="2 10" stroke-linecap="round" opacity=".25"/>
+      </svg>
+
+      <div class="home-container process__grid">
+        <div class="process__intro" data-stagger>
+          <p class="eyebrow eyebrow--dash wipe-reveal">How it works</p>
+          <h2 class="process__title word-reveal" id="process-title">From Pitch <br>to Partnership</h2>
+          <p class="process__text text-reveal">Share your plan, go through a focused review, and gain a long-term partner. We review every application personally and respond within 7 working days.</p>
+          <a class="btn btn--lime btn--md process__cta" href="contact.html" data-reveal>Apply now <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        </div>
+
+        <ol class="steps" role="list" data-observe data-search-type="How it works">
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">01</span>
+            <div class="step__body">
+              <h3 class="step__title">Submit Your Pitch</h3>
+              <p class="step__text">Share your business plan, vision, and funding requirements. We review your application personally and respond within 7 working days.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">02</span>
+            <div class="step__body">
+              <h3 class="step__title">Due Diligence &amp; Alignment</h3>
+              <p class="step__text">We evaluate market potential, founder-market fit, and growth trajectory. If there's alignment, we structure an investment between ₹10 Lakhs and ₹1 Crore.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">03</span>
+            <div class="step__body">
+              <h3 class="step__title">Partner for Growth</h3>
+              <p class="step__text">Once the investment is finalized, we become your long-term partner. Beyond capital, we provide strategic guidance, national and international market access, and mentorship to help you build, grow, and scale your business.</p>
+            </div>
+          </li>
+          <li class="steps__light" aria-hidden="true" role="presentation"></li>
+        </ol>
+      </div>
+
+      <ul class="home-container stats" role="list" aria-label="Illumexa in numbers" data-stagger>
+        <li class="stat" data-reveal><span class="stat__value">₹10L – ₹1Cr</span><span class="stat__label">Investment range</span></li>
+        <li class="stat" data-reveal><span class="stat__value" data-count="7" data-suffix=" days">7 days</span><span class="stat__label">Response to every pitch</span></li>
+        <li class="stat" data-reveal><span class="stat__value" data-count="120" data-suffix="+">120+</span><span class="stat__label">Startups backed</span></li>
+        <li class="stat" data-reveal><span class="stat__value" data-count="25" data-suffix="k+">25k+</span><span class="stat__label">Jobs created</span></li>
+      </ul>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="services" id="services" aria-labelledby="services-title" data-observe data-seam>
+      <div class="container">
+        <h2 class="section-title services__title word-reveal" id="services-title">Our Services</h2>
+
+        <!-- Looping carousel: the first card listed sits just off-screen to the left, so the
+             mock's opening view (Investment, Formation, Strategic) centres on the third dot. -->
+        <div class="carousel" data-carousel data-carousel-start="1" aria-roledescription="carousel" aria-label="Our services" data-reveal>
+          <div class="carousel__viewport">
+            <button class="carousel__arrow carousel__arrow--prev" type="button" aria-label="Previous services" aria-controls="services-track" data-carousel-prev>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+            </button>
+            <ul class="carousel__track" id="services-track" role="list" tabindex="0" data-carousel-track data-search-type="Service">
+              <li class="carousel__slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                <article class="service-card">
+                  <div class="service-card__media image-reveal" data-media>
+                    <img src="../assets/images/services/early-stage.jpg"
+                         srcset="../assets/images/services/early-stage-480.jpg 480w, ../assets/images/services/early-stage.jpg 842w"
+                         sizes="(max-width: 767px) 86vw, (max-width: 1023px) 45vw, 421px"
+                         alt="Startup team gathered around a “Start It Up!” presentation" width="842" height="1122" loading="lazy" decoding="async" data-fallback>
+                  </div>
+                  <div class="service-card__body">
+                    <h3 class="service-card__title">Built for Early-Stage Startups</h3>
+                    <p class="service-card__text">Seed-stage investment and investor readiness for founders at the very beginning.</p>
+                    <a class="service-card__link" href="services/early-stage-startups.html">Learn More <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="visually-hidden"> about support for early-stage startups</span></a>
+                  </div>
+                </article>
+              </li>
+              <li class="carousel__slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                <article class="service-card">
+                  <div class="service-card__media image-reveal" data-media>
+                    <img src="../assets/images/services/investment.jpg"
+                         srcset="../assets/images/services/investment-480.jpg 480w, ../assets/images/services/investment.jpg 842w"
+                         sizes="(max-width: 767px) 86vw, (max-width: 1023px) 45vw, 421px"
+                         alt="Two business partners in suits shaking hands" width="842" height="1122" loading="lazy" decoding="async" data-fallback>
+                  </div>
+                  <div class="service-card__body">
+                    <h3 class="service-card__title">Investment Solutions</h3>
+                    <p class="service-card__text">Helping founders secure the capital and preparation they need to build and grow.</p>
+                    <a class="service-card__link" href="services/investment-solutions.html">Learn More <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="visually-hidden"> about Investment Solutions</span></a>
+                  </div>
+                </article>
+              </li>
+              <li class="carousel__slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                <article class="service-card">
+                  <div class="service-card__media image-reveal" data-media>
+                    <img src="../assets/images/services/business-formation.jpg"
+                         srcset="../assets/images/services/business-formation-480.jpg 480w, ../assets/images/services/business-formation.jpg 842w"
+                         sizes="(max-width: 767px) 86vw, (max-width: 1023px) 45vw, 421px"
+                         alt="Hand signing a business registration document with a fountain pen" width="842" height="1122" loading="lazy" decoding="async" data-fallback>
+                  </div>
+                  <div class="service-card__body">
+                    <h3 class="service-card__title">Business Formation &amp; Facilitation</h3>
+                    <p class="service-card__text">Establishing a strong operational foundation for your business.</p>
+                    <a class="service-card__link" href="services/business-formation-facilitation.html">Learn More <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="visually-hidden"> about Business Formation &amp; Facilitation</span></a>
+                  </div>
+                </article>
+              </li>
+              <li class="carousel__slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                <article class="service-card">
+                  <div class="service-card__media image-reveal" data-media>
+                    <img src="../assets/images/services/strategic-consulting.jpg"
+                         srcset="../assets/images/services/strategic-consulting-480.jpg 480w, ../assets/images/services/strategic-consulting.jpg 842w"
+                         sizes="(max-width: 767px) 86vw, (max-width: 1023px) 45vw, 421px"
+                         alt="Team fitting large puzzle pieces together on a table" width="842" height="1122" loading="lazy" decoding="async" data-fallback>
+                  </div>
+                  <div class="service-card__body">
+                    <h3 class="service-card__title">Strategic Business Consulting</h3>
+                    <p class="service-card__text">Expert guidance to help founders make confident business decisions.</p>
+                    <a class="service-card__link" href="services/strategic-business-consulting.html">Learn More <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="visually-hidden"> about Strategic Business Consulting</span></a>
+                  </div>
+                </article>
+              </li>
+              <li class="carousel__slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                <article class="service-card">
+                  <div class="service-card__media image-reveal" data-media>
+                    <img src="../assets/images/services/marketing.jpg"
+                         srcset="../assets/images/services/marketing-480.jpg 480w, ../assets/images/services/marketing.jpg 842w"
+                         sizes="(max-width: 767px) 86vw, (max-width: 1023px) 45vw, 421px"
+                         alt="Two colleagues planning a growth strategy at a sticky-note board" width="842" height="1122" loading="lazy" decoding="async" data-fallback>
+                  </div>
+                  <div class="service-card__body">
+                    <h3 class="service-card__title">Marketing &amp; Brand Growth</h3>
+                    <p class="service-card__text">Positioning and growth support to take your brand into the right markets.</p>
+                    <a class="service-card__link" href="services/marketing-brand-growth.html">Learn More <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="visually-hidden"> about Marketing &amp; Brand Growth</span></a>
+                  </div>
+                </article>
+              </li>
+            </ul>
+            <button class="carousel__arrow carousel__arrow--next" type="button" aria-label="Next services" aria-controls="services-track" data-carousel-next>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+            </button>
+          </div>
+          <div class="carousel__dots" data-carousel-dots></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <!-- Dark two-column FAQ: the title and a line to Contact on the left, the accordion on
+         the right with the first answer open on arrival. -->
+    <section class="faq" id="faq" aria-labelledby="faq-title" data-observe data-seam data-ambient>
+      <div class="home-container faq__grid">
+        <div class="faq__intro" data-stagger>
+          <p class="eyebrow eyebrow--dash wipe-reveal">FAQ</p>
+          <h2 class="faq__title word-reveal" id="faq-title">Frequently <br>Asked <br><span class="text-lime">Questions</span></h2>
+          <p class="faq__text text-reveal">Can't find what you're looking for? We're happy to talk it through.</p>
+          <a class="faq__link reveal-up" href="contact.html">Contact us <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        </div>
+
+        <div class="faq-list" data-accordion data-stagger>
+          <div class="faq-item" data-accordion-item data-reveal>
+            <h3 class="faq-item__heading">
+              <button class="faq-item__trigger" type="button" id="faq-q1" aria-expanded="true" aria-controls="faq-a1" data-accordion-trigger>
+                <span class="faq-item__question">What is the investment range?</span>
+                <span class="faq-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+              </button>
+            </h3>
+            <div class="faq-item__panel" id="faq-a1" role="region" aria-labelledby="faq-q1">
+              <div class="faq-item__inner">
+                <p>We invest between ₹10 Lakhs and ₹1 Crore in each company. The exact amount is structured once we've evaluated market potential, founder-market fit, and growth trajectory, and there's alignment on the plan.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item" data-accordion-item data-reveal>
+            <h3 class="faq-item__heading">
+              <button class="faq-item__trigger" type="button" id="faq-q2" aria-expanded="false" aria-controls="faq-a2" data-accordion-trigger>
+                <span class="faq-item__question">What kind of companies do you invest in?</span>
+                <span class="faq-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+              </button>
+            </h3>
+            <div class="faq-item__panel" id="faq-a2" role="region" aria-labelledby="faq-q2">
+              <div class="faq-item__inner">
+                <p>We back ambitious early-stage founders building meaningful companies. We look for strong founder-market fit, real market potential and a clear growth trajectory.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item" data-accordion-item data-reveal>
+            <h3 class="faq-item__heading">
+              <button class="faq-item__trigger" type="button" id="faq-q3" aria-expanded="false" aria-controls="faq-a3" data-accordion-trigger>
+                <span class="faq-item__question">What mentorship do you provide?</span>
+                <span class="faq-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+              </button>
+            </h3>
+            <div class="faq-item__panel" id="faq-a3" role="region" aria-labelledby="faq-q3">
+              <div class="faq-item__inner">
+                <p>Every founder is connected with experienced mentors who share strategic insight and practical expertise, helping you overcome challenges and make informed decisions as you scale.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item" data-accordion-item data-reveal>
+            <h3 class="faq-item__heading">
+              <button class="faq-item__trigger" type="button" id="faq-q4" aria-expanded="false" aria-controls="faq-a4" data-accordion-trigger>
+                <span class="faq-item__question">How does the market access work?</span>
+                <span class="faq-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+              </button>
+            </h3>
+            <div class="faq-item__panel" id="faq-a4" role="region" aria-labelledby="faq-q4">
+              <div class="faq-item__inner">
+                <p>We connect you with customers, partners and opportunities across India, the United States and Europe, so you can expand into new markets and build strategic partnerships.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="cta" id="pitch" aria-labelledby="cta-title" data-parallax-scope data-observe>
+      <div class="container cta__inner" data-stagger>
+        <h2 class="cta__title word-reveal scroll-grow" id="cta-title">
+          <span class="cta__line">Turn Your Vision Into The</span>
+          <span class="cta__line">Next Great Venture</span>
+        </h2>
+        <p class="cta__text text-reveal">We're looking for ambitious founders building meaningful companies. If you need capital, international market access, or strategic mentorship. Let's talk.</p>
+        <a class="btn btn--lime btn--lg" href="contact.html" data-reveal>Pitch to us</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <!-- data-motion: the ILLUMEXA outline draws itself as the footer scrolls in, a single light
+       passes through it, and the columns, links and rule reveal in sequence. -->
+  <footer class="site-footer" data-observe data-motion>
+    <svg class="site-footer__outline" viewBox="0 0 4606 1000" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="outline-sweep-fill" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".5" stop-color="#fff"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="outline-sweep" maskUnits="userSpaceOnUse" x="0" y="0" width="4606" height="1000">
+          <rect class="site-footer__sweep" x="-1400" y="0" width="1400" height="1000" fill="url(#outline-sweep-fill)"/>
+        </mask>
+      </defs>
+      <text class="site-footer__outline-text" x="2303" y="849" text-anchor="middle">ILLUMEXA</text>
+      <text class="site-footer__outline-text site-footer__outline-text--light" x="2303" y="849" text-anchor="middle" mask="url(#outline-sweep)">ILLUMEXA</text>
+    </svg>
+
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <p class="site-footer__name word-reveal">ILLUMEXA SOLUTIONS</p>
+        <p class="site-footer__about text-reveal">Architecting the future through strategic capital and technical excellence. The blueprint for modern innovation.</p>
+        <div class="site-footer__social reveal-group" data-stagger>
+          <a class="icon-btn reveal-item" href="index.html" aria-label="Illumexa Solutions website">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg>
+          </a>
+          <button class="icon-btn reveal-item" type="button" aria-label="Share this page" data-share>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-share"/></svg>
+          </button>
+          <span class="visually-hidden" aria-live="polite" data-share-status></span>
+        </div>
+      </div>
+
+      <nav class="site-footer__col" aria-labelledby="footer-quick">
+        <h2 class="site-footer__heading char-reveal" id="footer-quick">Quick Links</h2>
+        <ul class="site-footer__links reveal-group" role="list" data-stagger>
+          <li class="reveal-item"><a href="index.html">Home</a></li>
+          <li class="reveal-item"><a href="services.html">Services</a></li>
+          <li class="reveal-item"><a href="about-us.html">About Us</a></li>
+          <li class="reveal-item"><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-labelledby="footer-legal">
+        <h2 class="site-footer__heading char-reveal" id="footer-legal">Legal</h2>
+        <ul class="site-footer__links reveal-group" role="list" data-stagger>
+          <li class="reveal-item"><a href="#" data-page="privacy">Privacy</a></li>
+          <li class="reveal-item"><a href="#" data-page="terms">Terms</a></li>
+          <li class="reveal-item"><a href="faq.html">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span class="site-footer__rule line-reveal" aria-hidden="true"></span>
+      <div class="container site-footer__bar reveal">
+        <p>© 2026 Illumexa Solutions. The blueprint for innovation.</p>
+        <p class="site-footer__meta"><span>Est. 2026</span><span>Global Ops</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SEARCH ============ -->
+  <dialog class="search" id="site-search" aria-labelledby="search-title" data-search>
+    <h2 class="visually-hidden" id="search-title">Search this page</h2>
+    <form class="search__form" role="search" data-search-form>
+      <img class="search__icon" src="../assets/images/logo/illumexa-mark.png" alt="" width="127" height="176" decoding="async">
+      <label class="visually-hidden" for="search-input">Search services, steps and questions</label>
+      <input class="search__input" id="search-input" type="search" placeholder="Search services, steps, FAQs…" autocomplete="off" spellcheck="false" data-search-input>
+      <button class="search__close" type="button" data-search-close>Esc<span class="visually-hidden"> — close search</span></button>
+    </form>
+    <ul class="search__results" role="list" data-search-results></ul>
+    <p class="visually-hidden" aria-live="polite" data-search-status></p>
+  </dialog>
+</body>
+</html>

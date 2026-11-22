@@ -1,0 +1,179 @@
+/* ==========================================================================
+   Illumexa — neon wave loader
+   A black loading screen: the wave disc (15 shimmering bars, 5 beads travelling as a
+   wave behind a soft neon halo) over a LOADING… caption. Self-contained — it shares
+   nothing with the rest of the site, so it can be dropped into any page.
+
+   Tune it with the variables on .loader:
+     --loader-accent  the neon (everything in the SVG draws with currentColor)
+     --loader-bg      the screen and the vignette that fades the bars at the disc edge
+     --loader-size    the disc's width (already fluid)
+     --loader-dur     one pass of the wave
+     --loader-rate    >1 slows the whole thing down, <1 speeds it up
+     --loader-fade    how long the screen takes to leave once .is-done is set
+   ========================================================================== */
+
+.loader {
+  --loader-accent: #cfff00;
+  --loader-bg: #000;
+  --loader-size: clamp(96px, 22vw, 136px);
+  --loader-dur: 1.8s;
+  --loader-rate: 1;
+  --loader-fade: 600ms;
+  --loader-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: clamp(22px, 4vw, 32px);
+  /* An almost-black screen with the faintest breath of neon behind the disc. */
+  background: radial-gradient(58% 48% at 50% 46%, rgba(207, 255, 0, 0.07), rgba(207, 255, 0, 0) 72%), var(--loader-bg);
+  background: radial-gradient(58% 48% at 50% 46%, color-mix(in srgb, var(--loader-accent) 7%, transparent), transparent 72%), var(--loader-bg);
+  color: var(--loader-accent);
+}
+
+/* While the screen is up the page behind it stays put. The class is added by the snippet
+   in script, so a page whose script never runs is never left locked. */
+.is-loading,
+.is-loading body {
+  overflow: hidden;
+}
+
+/* The screen leaves by fading out; visibility keeps it out of the tab order afterwards. */
+.loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--loader-fade) var(--loader-ease-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    visibility 0s linear var(--loader-fade);
+}
+
+/* Wave disc ---------------------------------------------------------------- */
+.wav {
+  --wav-dur: calc(var(--loader-dur) * var(--loader-rate));
+  --wav-ease: cubic-bezier(0.45, 0.05, 0.55, 0.95); /* close to a sine, so the wave never snaps */
+
+  display: block;
+  width: var(--loader-size);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Bars behind the wave: they brighten in turn, one step behind their neighbour. */
+.wav-bar {
+  stroke: currentColor;
+  stroke-width: 0.7;
+  opacity: 0.2;
+  animation: wav-shimmer var(--wav-dur) var(--wav-ease) infinite;
+  animation-delay: calc(var(--i) * var(--wav-dur) / -9);
+}
+
+.wav-bead,
+.wav-halo {
+  fill: currentColor;
+  animation: wav-bob var(--wav-dur) var(--wav-ease) infinite;
+  animation-delay: calc(var(--i) * var(--wav-dur) / -7);
+}
+
+/* The halo rides with its bead (one blurred group, so the cores stay crisp) and swells
+   as the bead sweeps through the middle of the disc. */
+.wav-halo {
+  opacity: 0.18;
+  animation:
+    wav-bob var(--wav-dur) var(--wav-ease) infinite,
+    wav-flare var(--wav-dur) var(--wav-ease) infinite;
+  animation-delay: calc(var(--i) * var(--wav-dur) / -7);
+}
+
+/* The disc's own edge, and the vignette that lets the bars fade into the screen. */
+.wav-ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.6;
+  opacity: 0.22;
+}
+
+.wav-fade-in {
+  stop-color: var(--loader-bg);
+  stop-opacity: 0;
+}
+
+.wav-fade-out {
+  stop-color: var(--loader-bg);
+  stop-opacity: 0.92;
+}
+
+@keyframes wav-bob {
+  0%,
+  100% { transform: translateY(-16px); }
+  50% { transform: translateY(16px); }
+}
+
+@keyframes wav-shimmer {
+  0%,
+  100% { opacity: 0.2; }
+  50% { opacity: 0.62; }
+}
+
+/* Twice a pass: the bead crosses the centre at a quarter and three quarters of the wave. */
+@keyframes wav-flare {
+  0%,
+  50%,
+  100% { opacity: 0.16; }
+  25%,
+  75% { opacity: 0.8; }
+}
+
+/* Caption ------------------------------------------------------------------ */
+.loader__text {
+  margin: 0;
+  font-family: var(--loader-font);
+  font-size: clamp(0.6875rem, 0.62rem + 0.28vw, 0.8125rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em; /* letter-spacing trails the last letter; this re-centres the word */
+  text-transform: uppercase;
+  color: var(--loader-accent);
+  animation: wav-breathe calc(var(--loader-dur) * 1.6 * var(--loader-rate)) ease-in-out infinite;
+}
+
+@keyframes wav-breathe {
+  0%,
+  100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* Nothing moves: the wave simply holds its shape and the caption stays lit. */
+@media (prefers-reduced-motion: reduce) {
+  .wav-bar,
+  .wav-bead,
+  .wav-halo,
+  .loader__text {
+    animation: none;
+  }
+
+  .wav-bar {
+    opacity: 0.3;
+  }
+
+  .wav-bead,
+  .wav-halo {
+    transform: translateY(calc((var(--i) - 2) * 7px));
+  }
+
+  .wav-halo {
+    opacity: 0.45;
+  }
+
+  .loader__text {
+    opacity: 1;
+  }
+
+  .loader.is-done {
+    transition-duration: 1ms;
+  }
+}

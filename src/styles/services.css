@@ -1,0 +1,412 @@
+/* ==========================================================================
+   Illumexa — Services page
+   1. Hero  2. How We Support  3. Responsive
+   ========================================================================== */
+
+/* 1. Hero ----------------------------------------------------------------- */
+.svc-hero {
+  --page-top-gap: 76px;
+  padding-bottom: 204px;
+  text-align: center;
+}
+
+.svc-hero__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-lime-ink);
+}
+
+.svc-hero__title {
+  max-width: 8em;
+  margin: 26px auto 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 1rem + 4.4vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.08em;
+  color: var(--c-black);
+}
+
+.svc-hero__text {
+  max-width: 600px;
+  margin: 50px auto 0;
+  font-size: clamp(1rem, 0.9rem + 0.3vw, 1.125rem);
+  line-height: 1.62;
+  color: #1c1c1c;
+}
+
+.svc-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 26px;
+  margin-top: 80px;
+}
+
+.svc-hero__actions .btn--lime {
+  min-width: 258px;
+}
+
+.svc-hero__actions .btn--outline {
+  min-width: 220px;
+}
+
+/* 2. Our Services --------------------------------------------------------- */
+/* Linked cards: the <a> is the card, so the whole surface (title, text, "Explore service")
+   opens the service page. Lift/tilt come from .fx-card, the cursor light from data-glow. */
+.offer {
+  padding-bottom: 140px;
+}
+
+.offer__text {
+  max-width: 560px;
+  margin-top: 20px;
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  color: var(--c-text-soft);
+}
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 33px 36px;
+  margin-top: 49px;
+}
+
+.offer-grid > li {
+  display: flex;
+}
+
+.offer-card {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 356px;
+  padding: 38px 34px 34px 41px;
+  text-decoration: none;
+  color: var(--c-white);
+}
+
+.offer-card:hover {
+  box-shadow:
+    0 26px 44px -26px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(205, 242, 0, 0.35);
+}
+
+.offer-card:focus-visible {
+  outline: 3px solid var(--c-lime);
+  outline-offset: 4px;
+}
+
+.offer-card__index {
+  position: absolute;
+  top: 34px;
+  right: 34px;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(205, 242, 0, 0.55);
+}
+
+.offer-card .dark-card__icon {
+  transition:
+    transform 450ms var(--ease-expo),
+    filter 450ms var(--ease-out);
+}
+
+.offer-card:hover .dark-card__icon {
+  transform: translateY(-2px) scale(1.06);
+  filter: drop-shadow(0 0 8px rgba(205, 242, 0, 0.55));
+}
+
+.offer-card__title {
+  max-width: 10em;
+  margin-top: 24px;
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1rem + 0.8vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #f2f2f2;
+  transition: transform 450ms var(--ease-expo);
+}
+
+.offer-card:hover .offer-card__title {
+  transform: translateX(3px);
+}
+
+.offer-card__text {
+  margin-top: 14px;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: #cfcfcf;
+}
+
+.offer-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 28px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--c-lime);
+}
+
+.offer-card__cta .icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 450ms var(--ease-expo);
+}
+
+.offer-card:hover .offer-card__cta .icon,
+.offer-card:focus-visible .offer-card__cta .icon {
+  transform: translateX(5px);
+}
+
+/* The sixth slot points founders who don't see themselves above to the contact form. */
+.offer-card--light {
+  border: 1px solid #dcdcdc;
+  border-radius: var(--radius-sm);
+  background: var(--c-lime-wash);
+  color: var(--c-black);
+  transition:
+    transform 450ms var(--ease-expo),
+    box-shadow 450ms var(--ease-out),
+    border-color 350ms var(--ease-out);
+}
+
+.offer-card--light:hover {
+  border-color: var(--c-lime);
+  box-shadow: 0 26px 44px -30px rgba(0, 0, 0, 0.35);
+}
+
+.offer-card--light .offer-card__index {
+  color: var(--c-lime-ink);
+}
+
+.offer-card--light .offer-card__title {
+  margin-top: 0;
+  color: var(--c-black);
+}
+
+.offer-card--light .offer-card__text {
+  color: var(--c-text-soft);
+}
+
+.offer-card--light .offer-card__cta {
+  color: var(--c-lime-ink);
+}
+
+/* 2b. How We Support ------------------------------------------------------ */
+.support {
+  padding-bottom: 211px;
+}
+
+.support__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--c-lime-ink);
+}
+
+.support__title {
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.2rem + 2.2vw, 3.125rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+  color: var(--c-black);
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 33px 36px;
+  margin-top: 49px;
+}
+
+.support-grid > li {
+  display: flex;
+}
+
+/* Hover lift and tilt come from .fx-card (base.css), the light that follows the cursor from
+   data-glow; the card adds a lime edge, and its icon and title respond. */
+.support-card {
+  flex: 1;
+  min-height: 316px;
+  padding: 41px 34px 40px 41px;
+}
+
+.support-card:hover {
+  box-shadow:
+    0 26px 44px -26px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(205, 242, 0, 0.35);
+}
+
+.support-card .dark-card__icon {
+  transition:
+    transform 450ms var(--ease-expo),
+    filter 450ms var(--ease-out);
+}
+
+.support-card:hover .dark-card__icon {
+  transform: translateY(-2px) scale(1.06);
+  filter: drop-shadow(0 0 8px rgba(205, 242, 0, 0.55));
+}
+
+.support-card__title {
+  transition: transform 450ms var(--ease-expo);
+}
+
+.support-card:hover .support-card__title {
+  transform: translateX(3px);
+}
+
+/* Hero sequence: eyebrow, the headline word by word, then its paragraph, and the buttons last. */
+.svc-hero__title { --reveal-delay: 60ms; }
+.svc-hero__text { --reveal-delay: 260ms; }
+.svc-hero__actions { --reveal-delay: 420ms; }
+
+.support-card__title {
+  max-width: 8.9em;
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 1rem + 1.2vw, 2.0625rem);
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: -0.016em;
+  color: #f2f2f2;
+}
+
+.support-card__text {
+  margin-top: 18px;
+  font-size: 0.97rem;
+  line-height: 1.55;
+  color: #cfcfcf;
+}
+
+/* 3. Responsive ----------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .support-card {
+    padding: 34px 28px 34px 32px;
+  }
+
+  .offer-card {
+    min-height: 320px;
+    padding: 32px 28px 30px 32px;
+  }
+
+  .offer-card__index {
+    top: 30px;
+    right: 28px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .svc-hero {
+    padding-bottom: 140px;
+  }
+
+  .offer,
+  .support {
+    padding-bottom: 140px;
+  }
+
+  .offer-grid,
+  .support-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .offer-card {
+    min-height: 300px;
+  }
+
+  .support-card {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 767px) {
+  .svc-hero {
+    --page-top-gap: 48px;
+    padding-bottom: 96px;
+  }
+
+  .svc-hero__eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+  }
+
+  .svc-hero__title {
+    margin-top: 18px;
+    letter-spacing: -0.06em;
+  }
+
+  .svc-hero__text {
+    margin-top: 28px;
+  }
+
+  .svc-hero__actions {
+    margin-top: 40px;
+  }
+
+  .offer,
+  .support {
+    padding-bottom: 96px;
+  }
+
+  .offer__text {
+    margin-top: 14px;
+    font-size: 1rem;
+  }
+
+  .offer-grid,
+  .support-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .offer-card,
+  .support-card {
+    min-height: 0;
+    padding: 28px 24px 30px;
+  }
+
+  .offer-card__index {
+    top: 26px;
+    right: 24px;
+  }
+
+  .offer-card__cta {
+    padding-top: 22px;
+  }
+
+  /* The iconless card needs no empty slot once cards stack. */
+  span.dark-card__icon {
+    display: none;
+  }
+
+  span.dark-card__icon + .support-card__title {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 479px) {
+  .svc-hero__actions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}

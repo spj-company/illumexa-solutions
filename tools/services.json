@@ -1,0 +1,118 @@
+{
+  "_comment": "Source data for src/services/*.html. Run tools/build-service-pages.ps1 after editing. All copy here already appears on the site (homepage cards, the Why section, the FAQ page's service details); nothing is invented.",
+  "services": [
+    {
+      "slug": "early-stage-startups",
+      "index": "01",
+      "title": "Built for Early-Stage Startups",
+      "short": "Early-Stage Startups",
+      "icon": "i-rocket",
+      "image": "early-stage",
+      "alt": "Startup team gathered around a “Start It Up!” presentation",
+      "summary": "Seed-stage investment and investor readiness for founders at the very beginning.",
+      "lead": [
+        "Seed-stage investment and investor readiness for founders at the very beginning.",
+        "We invest in startups at their earliest stage when ideas are still forming but potential is highest."
+      ],
+      "sectionTitle": "What’s included",
+      "note": "Seed stage funding from <strong>₹10 Lakhs to ₹1 Crore</strong>, and the preparation to make the most of it.",
+      "items": [
+        { "title": "Seed Stage Funding (₹10 Lakhs to ₹1 Crore)", "text": "We provide seed stage investment ranging from ₹10 Lakhs to ₹1 Crore to help founders transform innovative ideas into successful and scalable businesses." },
+        { "title": "Investment Readiness", "text": "We prepare startups for investment by strengthening their business model, refining their strategy, and ensuring they are ready to confidently engage with investors." },
+        { "title": "Pitch Evaluation", "text": "We review and evaluate pitch decks, business plans, and presentations, providing constructive feedback to help founders communicate their vision and investment opportunity effectively." },
+        { "title": "Due Diligence Support", "text": "We help founders organize the financial, legal, and operational documentation required during the investment process, ensuring they are well prepared for investor evaluation and due diligence." }
+      ]
+    },
+    {
+      "slug": "investment-solutions",
+      "index": "02",
+      "title": "Investment Solutions",
+      "short": "Investment Solutions",
+      "icon": "i-cash",
+      "image": "investment",
+      "alt": "Two business partners in suits shaking hands",
+      "summary": "Helping founders secure the capital and preparation they need to build and grow.",
+      "lead": [
+        "Helping founders secure the capital and preparation they need to build and grow.",
+        "Capital is the foundation of every successful venture. We invest ₹10 Lakhs to ₹1 Crore to help founders transform innovative ideas into scalable businesses. Our investment provides more than funding by supporting long-term growth from the very beginning."
+      ],
+      "sectionTitle": "How it works",
+      "note": "<strong>₹10 Lakhs – ₹1 Crore per investment.</strong> We review every application personally and respond within 7 working days.",
+      "items": [
+        { "title": "Submit Your Pitch", "text": "Share your business plan, vision, and funding requirements. We review your application personally and respond within 7 working days." },
+        { "title": "Due Diligence & Alignment", "text": "We evaluate market potential, founder-market fit, and growth trajectory. If there’s alignment, we structure an investment between ₹10 Lakhs and ₹1 Crore." },
+        { "title": "Partner for Growth", "text": "Once the investment is finalized, we become your long-term partner. Beyond capital, we provide strategic guidance, national and international market access, and mentorship to help you build, grow, and scale your business." }
+      ]
+    },
+    {
+      "slug": "business-formation-facilitation",
+      "index": "03",
+      "title": "Business Formation & Facilitation",
+      "short": "Business Formation",
+      "icon": "i-handshake",
+      "image": "business-formation",
+      "alt": "Hand signing a business registration document with a fountain pen",
+      "summary": "Establishing a strong operational foundation for your business.",
+      "lead": [
+        "Establishing a strong operational foundation for your business."
+      ],
+      "sectionTitle": "What’s included",
+      "note": "From registration to the vendors and partners that keep a business running.",
+      "items": [
+        { "title": "Company Registration", "text": "We assist founders in selecting the appropriate business structure and completing the company registration process, ensuring a smooth and compliant business setup." },
+        { "title": "Compliance & Documentation", "text": "We help businesses meet statutory and regulatory requirements by managing essential documentation, registrations, and ongoing compliance obligations." },
+        { "title": "Banking & Financial Setup", "text": "We support founders in establishing business banking, payment systems, and financial processes to ensure efficient business operations from day one." },
+        { "title": "Business Licensing", "text": "We assist in obtaining the licenses, permits, and registrations required to legally establish and operate your business." },
+        { "title": "Business Operations Support", "text": "We provide operational guidance and support to help businesses streamline processes, improve efficiency, and build a strong foundation for sustainable growth." },
+        { "title": "Vendor & Strategic Partner Connections", "text": "We connect founders with trusted vendors, service providers, and strategic partners who can support business operations, growth, and long term success." }
+      ]
+    },
+    {
+      "slug": "strategic-business-consulting",
+      "index": "04",
+      "title": "Strategic Business Consulting",
+      "short": "Strategic Consulting",
+      "icon": "i-compass",
+      "image": "strategic-consulting",
+      "alt": "Team fitting large puzzle pieces together on a table",
+      "summary": "Expert guidance to help founders make confident business decisions.",
+      "lead": [
+        "Expert guidance to help founders make confident business decisions."
+      ],
+      "sectionTitle": "What’s included",
+      "note": "Strategy, models, finance and risk — the decisions that shape a growing business.",
+      "items": [
+        { "title": "Business Strategy", "text": "We help founders define clear business objectives, develop competitive strategies, and create actionable plans that drive sustainable growth." },
+        { "title": "Business Model Development", "text": "We work with entrepreneurs to design and refine business models that are scalable, sustainable, and aligned with market opportunities and customer needs." },
+        { "title": "Financial Planning", "text": "We assist in developing financial plans, revenue projections, budgeting, and cash flow strategies that support informed decision making and long term business stability." },
+        { "title": "Market Entry Strategy", "text": "We help businesses identify target markets, evaluate opportunities, and develop effective strategies for successfully entering and expanding into new markets." },
+        { "title": "Growth Consulting", "text": "We provide strategic guidance to help businesses optimize performance, overcome growth challenges, and identify opportunities for expansion and long term success." },
+        { "title": "Operational Advisory", "text": "We advise founders on improving business operations, enhancing efficiency, and implementing processes that support sustainable business growth." },
+        { "title": "Risk Assessment", "text": "We help identify potential business, financial, and operational risks, enabling founders to make informed decisions and build resilient businesses." }
+      ]
+    },
+    {
+      "slug": "marketing-brand-growth",
+      "index": "05",
+      "title": "Marketing & Brand Growth",
+      "short": "Marketing & Brand Growth",
+      "icon": "i-market",
+      "image": "marketing",
+      "alt": "Two colleagues planning a growth strategy at a sticky-note board",
+      "summary": "Positioning and growth support to take your brand into the right markets.",
+      "lead": [
+        "Positioning and growth support to take your brand into the right markets."
+      ],
+      "sectionTitle": "What’s included",
+      "note": "Positioning, launch and growth, with visibility across India, the United States and Europe.",
+      "items": [
+        { "title": "Brand Positioning", "text": "We help founders define a clear brand identity, value proposition, and messaging that set their business apart in competitive markets." },
+        { "title": "Go-to-Market Strategy", "text": "We plan product launches and market entry, identifying the right audiences, channels, and timing to reach customers effectively." },
+        { "title": "Digital Marketing", "text": "We guide founders in building an effective online presence across search, social media, and content to attract and convert customers." },
+        { "title": "Market Research & Customer Insights", "text": "We help businesses understand their customers, competitors, and market trends to make informed marketing decisions." },
+        { "title": "Growth Campaigns", "text": "We support founders in designing and measuring campaigns that drive customer acquisition, engagement, and sustainable revenue growth." },
+        { "title": "Partnerships & Visibility", "text": "We connect founders with media, industry, and strategic partners that increase brand visibility across India, the United States, and Europe." }
+      ]
+    }
+  ]
+}

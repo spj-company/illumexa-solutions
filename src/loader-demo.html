@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neon Wave Loader | Illumexa Solutions</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#000000">
+
+  <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/loader.css">
+  <style>
+    /* Preview only: the page behind the screen is black too, so nothing flashes white. */
+    body { background: #000; }
+  </style>
+</head>
+<body>
+  <!-- Preview page: the loading screen stays up so it can be looked at. On a real page it
+       leaves as soon as the page has loaded — see the snippet at the bottom of this file. -->
+
+  <!-- ============ LOADING SCREEN ============ -->
+  <!-- Copy this block, styles/loader.css and (optionally) the script below into any page. -->
+  <div class="loader" id="site-loader" role="status">
+    <svg class="wav" viewBox="0 0 64 64" width="128" height="128" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="wav-disc">
+          <circle cx="32" cy="32" r="31"/>
+        </clipPath>
+
+        <!-- One blur for all five halos, so the bead cores stay crisp. -->
+        <filter id="wav-glow" x="-75%" y="-75%" width="250%" height="250%" color-interpolation-filters="sRGB">
+          <feGaussianBlur stdDeviation="2.4"/>
+        </filter>
+
+        <!-- Fades the bars into the screen at the rim of the disc. -->
+        <radialGradient id="wav-fade" cx="50%" cy="50%" r="50%">
+          <stop class="wav-fade-in" offset="52%"/>
+          <stop class="wav-fade-out" offset="100%"/>
+        </radialGradient>
+      </defs>
+
+      <g clip-path="url(#wav-disc)">
+        <g class="wav-bars">
+          <line class="wav-bar" x1="4" y1="0" x2="4" y2="64" style="--i:0"/>
+          <line class="wav-bar" x1="8" y1="0" x2="8" y2="64" style="--i:1"/>
+          <line class="wav-bar" x1="12" y1="0" x2="12" y2="64" style="--i:2"/>
+          <line class="wav-bar" x1="16" y1="0" x2="16" y2="64" style="--i:3"/>
+          <line class="wav-bar" x1="20" y1="0" x2="20" y2="64" style="--i:4"/>
+          <line class="wav-bar" x1="24" y1="0" x2="24" y2="64" style="--i:5"/>
+          <line class="wav-bar" x1="28" y1="0" x2="28" y2="64" style="--i:6"/>
+          <line class="wav-bar" x1="32" y1="0" x2="32" y2="64" style="--i:7"/>
+          <line class="wav-bar" x1="36" y1="0" x2="36" y2="64" style="--i:8"/>
+          <line class="wav-bar" x1="40" y1="0" x2="40" y2="64" style="--i:9"/>
+          <line class="wav-bar" x1="44" y1="0" x2="44" y2="64" style="--i:10"/>
+          <line class="wav-bar" x1="48" y1="0" x2="48" y2="64" style="--i:11"/>
+          <line class="wav-bar" x1="52" y1="0" x2="52" y2="64" style="--i:12"/>
+          <line class="wav-bar" x1="56" y1="0" x2="56" y2="64" style="--i:13"/>
+          <line class="wav-bar" x1="60" y1="0" x2="60" y2="64" style="--i:14"/>
+        </g>
+
+        <g class="wav-halos" filter="url(#wav-glow)">
+          <circle class="wav-halo" cx="14.08" cy="32" r="4.6" style="--i:0"/>
+          <circle class="wav-halo" cx="23.04" cy="32" r="4.6" style="--i:1"/>
+          <circle class="wav-halo" cx="32" cy="32" r="4.6" style="--i:2"/>
+          <circle class="wav-halo" cx="40.96" cy="32" r="4.6" style="--i:3"/>
+          <circle class="wav-halo" cx="49.92" cy="32" r="4.6" style="--i:4"/>
+        </g>
+
+        <g class="wav-beads">
+          <circle class="wav-bead" cx="14.08" cy="32" r="2.4" style="--i:0"/>
+          <circle class="wav-bead" cx="23.04" cy="32" r="2.4" style="--i:1"/>
+          <circle class="wav-bead" cx="32" cy="32" r="2.4" style="--i:2"/>
+          <circle class="wav-bead" cx="40.96" cy="32" r="2.4" style="--i:3"/>
+          <circle class="wav-bead" cx="49.92" cy="32" r="2.4" style="--i:4"/>
+        </g>
+
+        <circle class="wav-vignette" cx="32" cy="32" r="32" fill="url(#wav-fade)"/>
+      </g>
+
+      <circle class="wav-ring" cx="32" cy="32" r="31.4"/>
+    </svg>
+
+    <p class="loader__text">Loading&#8230;</p>
+  </div>
+
+  <!-- On a real page, add this after the block above. Without it the screen never leaves.
+  <script>
+    (function () {
+      var loader = document.getElementById('site-loader');
+      if (!loader) return;
+      var root = document.documentElement;
+      root.classList.add('is-loading');
+      var hide = function () {
+        loader.classList.add('is-done');
+        root.classList.remove('is-loading');
+      };
+      window.addEventListener('load', hide, { once: true });
+      setTimeout(hide, 6000);
+    })();
+  </script>
+  -->
+</body>
+</html>

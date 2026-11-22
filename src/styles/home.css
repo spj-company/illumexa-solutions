@@ -1,0 +1,1628 @@
+/* ==========================================================================
+   Illumexa — Homepage
+   1. Hero  2. Why Choose  3. Process & Stats  4. Services
+   5. FAQ  6. Final CTA  7. Motion  8. Responsive
+   ========================================================================== */
+
+/* The redesigned sections share one content column: 101px from the left edge and 118px
+   from the right at 1440 (the mock's asymmetry), fluid below. Services, the CTA and the
+   footer keep the site-wide .container. */
+.home-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-left: var(--home-left);
+  padding-right: var(--home-right);
+}
+
+main {
+  --home-left: clamp(20px, 7.01vw, 101px);
+  --home-right: clamp(20px, 8.2vw, 118px);
+}
+
+/* The redesigned sections use the design's deeper lime (#C6E70B, as the header does);
+   Services, the CTA and the footer keep the brand token. */
+.hero,
+.why,
+.process,
+.faq {
+  --c-lime: #c6e70b;
+  --c-lime-bright: #d7f23e;
+}
+
+/* 1. Hero ----------------------------------------------------------------- */
+/* 880px tall at 1440 (the header's 88px band included; the bar is fixed over it). */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  min-height: clamp(640px, 100svh, 880px);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--c-night);
+  color: var(--c-mist);
+}
+
+/* The video's poster attribute supplies the first frame (and is the LCP image).
+   On wider screens the scene sits ~11% lower, as in the mock, without changing its scale;
+   the frame's dark top edge falls behind the header. */
+.hero__video {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .hero__video {
+    inset: 11% 0 auto;
+  }
+}
+
+/* Dark at the top (behind the bar) and down the left where the copy sits. */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(11, 15, 8, 0.72) 0%, rgba(11, 15, 8, 0.42) 42%, rgba(11, 15, 8, 0.06) 70%),
+    linear-gradient(180deg, var(--c-night) 0px, rgba(11, 15, 8, 0.86) 88px, rgba(11, 15, 8, 0.3) 300px, rgba(11, 15, 8, 0.22) 70%, rgba(11, 15, 8, 0.62) 100%);
+  pointer-events: none;
+}
+
+/* A 3px soft focus on the film where the copy sits (left ~52% of the frame), masked so it
+   dissolves before the city; the video element itself is never filtered. */
+.hero__focus {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 44%, rgba(0, 0, 0, 0) 60%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 44%, rgba(0, 0, 0, 0) 60%);
+  pointer-events: none;
+}
+
+.hero__content {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 164px var(--home-right) 140px var(--home-left);
+}
+
+/* The badge rises first, then a single band of light crosses it. */
+.hero__badge {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  gap: 12px;
+  min-height: 37px;
+  padding: 0 18px 0 13px;
+  border-color: rgba(198, 231, 11, 0.18);
+  background: rgba(198, 231, 11, 0.08);
+  font-size: 0.6875rem;
+  letter-spacing: 0.3em;
+  animation: rise-in 800ms var(--ease-out) calc(var(--page-delay, 0ms) + 150ms) both;
+}
+
+.badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-lime);
+  box-shadow: 0 0 10px rgba(198, 231, 11, 0.7);
+}
+
+.hero__badge::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 45%;
+  background: linear-gradient(100deg, rgba(225, 255, 90, 0), rgba(225, 255, 90, 0.4) 50%, rgba(225, 255, 90, 0));
+  transform: translateX(-160%) skewX(-18deg);
+  animation: shine-pass 1400ms var(--ease-in-out) calc(var(--page-delay, 0ms) + 1300ms) both;
+  pointer-events: none;
+}
+
+/* A flex column, so the lines' cancelling margins (below) can't collapse into each other. */
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 0.5rem + 5vw, 5rem);
+  font-weight: 600;
+  line-height: 1.0375;
+  letter-spacing: -0.03em;
+  color: var(--c-mist);
+}
+
+.hero__line {
+  display: block;
+  overflow: hidden;
+  /* Room for ascenders/descenders, cancelled again so the layout is unchanged. */
+  padding-block: 0.1em 0.16em;
+  margin-block: -0.1em -0.16em;
+}
+
+/* The headline rises word by word, each out of its own mask (.word-reveal), after the badge;
+   "What Matters" lands in lime and briefly lights up. */
+.hero__line > span {
+  display: block;
+}
+
+.hero__title {
+  --reveal-delay: 260ms;
+}
+
+.hero__text {
+  --reveal-delay: 760ms;
+  max-width: 624px;
+  margin-top: 32px;
+  font-size: clamp(1rem, 0.86rem + 0.5vw, 1.3125rem);
+  line-height: 1.571;
+  color: rgba(245, 247, 221, 0.74);
+}
+
+.hero__actions {
+  --reveal-delay: 980ms;
+  --stagger: 120ms;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+/* The two hero pills: 58px, sentence case, the lime one carrying an arrow. */
+.btn--hero {
+  height: 58px;
+  padding-inline: 30px;
+  gap: 10px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.btn--hero .icon {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.btn--hero:hover .icon {
+  transform: translateX(4px);
+}
+
+/* Outlined pill on dark: a hairline that firms up on hover. */
+.btn--ghost {
+  border: 1px solid rgba(245, 247, 221, 0.22);
+  background: transparent;
+  color: var(--c-mist);
+}
+
+.btn--ghost.btn--hero {
+  padding-inline: 27px;
+}
+
+.btn--ghost:hover {
+  border-color: rgba(245, 247, 221, 0.6);
+  background: rgba(245, 247, 221, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Sits on the content column's left edge, which is centred once the page is wider than 1440. */
+.hero__scroll {
+  position: absolute;
+  left: max(var(--home-left), calc(50% - 720px + var(--home-left)));
+  bottom: 75px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(245, 247, 221, 0.5);
+  animation: fade-in 900ms var(--ease-out) calc(var(--page-delay, 0ms) + 900ms) both;
+  transition: color var(--dur) var(--ease-out);
+}
+
+.hero__scroll:hover {
+  color: var(--c-mist);
+}
+
+/* A short lime line beside the words, redrawn top to bottom while the hero is on screen. */
+.hero__scroll::before {
+  content: "";
+  width: 1px;
+  height: 27px;
+  background: rgba(198, 231, 11, 0.7);
+  transform-origin: top;
+  animation: scroll-cue 2.4s var(--ease-in-out) calc(var(--page-delay, 0ms) + 1.6s) infinite;
+}
+
+/* Short desktop viewports (1366×768, 1280×720): the same composition, tightened so the
+   copy, buttons and scroll cue all sit inside the first screen instead of running under it. */
+@media (min-width: 1024px) and (max-height: 840px) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero__content {
+    padding-top: clamp(112px, 15svh, 140px);
+  }
+
+  .hero__title {
+    margin-top: 22px;
+  }
+
+  .hero__text {
+    margin-top: 22px;
+  }
+
+  .hero__actions {
+    margin-top: 30px;
+  }
+
+  .hero__scroll {
+    bottom: 36px;
+  }
+}
+
+/* 2. Why Choose ----------------------------------------------------------- */
+.why {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: 133px 144px;
+  background: var(--c-mist);
+  color: var(--c-night);
+}
+
+.why__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 569px;
+  column-gap: 80px;
+  align-items: start;
+}
+
+/* On the pale ground the label is grey; its dash stays lime. */
+.why .eyebrow--dash {
+  color: #626956;
+}
+
+.why__title {
+  max-width: 562px;
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 0.5rem + 3.6vw, 3.734rem);
+  font-weight: 600;
+  line-height: 1.085;
+  letter-spacing: -0.03em;
+  color: var(--c-night);
+}
+
+.why__text {
+  margin-top: 8px;
+  font-size: clamp(1.0625rem, 0.9rem + 0.45vw, 1.21875rem);
+  line-height: 1.72;
+  color: #404636;
+}
+
+.why__text p + p {
+  margin-top: 20px;
+}
+
+.why__text strong {
+  font-weight: 600;
+  color: var(--c-night);
+}
+
+/* Three commitments on one rule, 372px columns at 1440. */
+.why__features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 54px;
+  row-gap: 48px;
+  margin-top: 105px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  padding-top: 33px;
+  border-top: 1px solid rgba(11, 15, 8, 0.14);
+}
+
+.feature__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feature__index {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #6a705d;
+}
+
+/* The lime disc redraws its line icon when the column is hovered. */
+.feature__icon {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--c-lime);
+  color: var(--c-night);
+  font-size: 22px;
+  transition: transform 450ms var(--ease-expo), box-shadow 450ms var(--ease-out);
+}
+
+.feature:hover .feature__icon {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 10px 24px -12px rgba(120, 150, 0, 0.6);
+}
+
+.feature:hover .fx-icon {
+  animation: icon-redraw 900ms var(--ease-out);
+}
+
+.feature__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: 1.6875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--c-night);
+}
+
+.feature__text {
+  margin-top: 22px;
+  margin-bottom: 23px;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #505544;
+}
+
+/* Pinned to the bottom of the column, so the dashed rules line up across all three. */
+.feature__note {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(11, 15, 8, 0.16);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--c-night);
+}
+
+/* 3. Process & Stats ------------------------------------------------------ */
+.process {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: 131px 116px;
+  background: var(--c-night);
+  color: var(--c-mist);
+}
+
+/* A lime light in the top-right corner, drifting a little against the scroll. */
+.process__glow {
+  --depth: 40px;
+  position: absolute;
+  top: -350px;
+  right: -340px;
+  z-index: -1;
+  width: 1000px;
+  height: 820px;
+  background: radial-gradient(closest-side, rgba(198, 231, 11, 0.18), rgba(198, 231, 11, 0.07) 50%, rgba(198, 231, 11, 0) 100%);
+  pointer-events: none;
+}
+
+/* Dotted guide lines, drawn in as the section arrives (svg[data-draw]). */
+.process__trace {
+  --depth: 24px;
+  --reveal-delay: 300ms;
+  --draw-dur: 2400ms;
+  --draw-step: 400ms;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.process__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 658px;
+  column-gap: 100px;
+  align-items: start;
+}
+
+.process__intro {
+  max-width: 460px;
+}
+
+.process__title {
+  margin-top: 29px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 0.5rem + 3.6vw, 3.734rem);
+  font-weight: 600;
+  line-height: 1.085;
+  letter-spacing: -0.03em;
+}
+
+.process__text {
+  margin-top: 27px;
+  font-size: 1.15625rem;
+  line-height: 1.68;
+  color: #b4b6a1;
+}
+
+/* The standard lime primary at the hero's pill size. */
+.process__cta {
+  position: relative;
+  z-index: 1;
+  height: 58px;
+  margin-top: 32px;
+  padding-inline: 33px;
+  gap: 12px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.process__cta .icon {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.process__cta:hover .icon {
+  transform: translateX(4px);
+}
+
+/* The steps: rule-divided rows, each a lime numeral beside its copy. */
+.steps {
+  position: relative;
+  margin: 8px 0 0;
+  border-top: 1px solid rgba(245, 247, 221, 0.1);
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  padding-block: 37px 39px;
+  border-bottom: 1px solid rgba(245, 247, 221, 0.1);
+}
+
+.step__num {
+  margin-top: 1px; /* its cap line meets the title's */
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c-lime);
+  transition: transform 500ms var(--ease-expo);
+}
+
+.step:hover .step__num {
+  transform: translateX(4px);
+}
+
+.step__title {
+  font-family: var(--font-display);
+  font-size: 1.65625rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.step__text {
+  max-width: 506px;
+  margin-top: 10px;
+  font-size: 1.09375rem;
+  line-height: 1.68;
+  color: #b3b5a0;
+}
+
+/* Once the steps are in, a light runs down the left edge of the list. */
+.steps__light {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  background: linear-gradient(rgba(198, 231, 11, 0), rgba(198, 231, 11, 0.9), rgba(198, 231, 11, 0)) center -180px / 2px 160px no-repeat;
+  pointer-events: none;
+}
+
+.steps.is-visible .steps__light {
+  animation: steps-light 5200ms var(--ease-in-out) 1800ms infinite;
+}
+
+.process:not(.is-in-view) .steps__light {
+  animation-play-state: paused;
+}
+
+/* Four figures under a rule. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 35px;
+  margin-top: 125px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(245, 247, 221, 0.1);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stat__value {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1rem + 2.15vw, 3.125rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.stat__label {
+  margin-top: 16px;
+  font-size: 0.78125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #909381;
+}
+
+/* 4. Services ------------------------------------------------------------- */
+.services {
+  position: relative;
+  overflow-x: clip; /* keeps the seam light inside the page */
+  padding-block: 100px 67px;
+  background: var(--c-white);
+}
+
+.services__title {
+  display: inline-block;
+}
+
+.services__title::after {
+  content: "";
+  display: block;
+  width: 141px;
+  height: 5px;
+  margin-top: 16px;
+  background: var(--c-lime);
+  transform-origin: left;
+  transition: transform 900ms var(--ease-out) 250ms;
+}
+
+.js .services__title:not(.is-visible)::after {
+  transform: scaleX(0);
+}
+
+.carousel {
+  --arrow-size: 46px;
+  margin-top: 70px;
+}
+
+/* The track with an arrow on either side, sitting in the page gutter so the cards
+   themselves are untouched. They only do anything with script. */
+.carousel__viewport {
+  position: relative;
+}
+
+.carousel__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  border: 1px solid var(--c-grey-300);
+  border-radius: 50%;
+  background: var(--c-white);
+  color: var(--c-black);
+  translate: 0 -50%;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+html:not(.js) .carousel__arrow {
+  display: none;
+}
+
+.carousel__arrow--prev {
+  left: calc(-1 * (var(--gutter) / 2 + var(--arrow-size) / 2));
+}
+
+.carousel__arrow--next {
+  right: calc(-1 * (var(--gutter) / 2 + var(--arrow-size) / 2));
+}
+
+.carousel__arrow .icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 450ms var(--ease-expo);
+}
+
+.carousel__arrow--prev .icon {
+  transform: rotate(180deg);
+}
+
+.carousel__arrow:hover {
+  border-color: var(--c-lime);
+  background: var(--c-lime-wash);
+}
+
+.carousel__arrow:hover .icon {
+  transform: translateX(3px);
+}
+
+.carousel__arrow--prev:hover .icon {
+  transform: rotate(180deg) translateX(3px);
+}
+
+.carousel__track {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 48px) / 3);
+  gap: 24px;
+  margin: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--radius-md);
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Set for one frame while the loop jumps from clones back to the real slides, and while
+   an arrow or dot glides the track, so snapping doesn't fight the movement. */
+.carousel__track.is-jumping,
+.carousel__track.is-gliding {
+  scroll-snap-type: none;
+}
+
+.carousel__slide {
+  display: flex;
+  scroll-snap-align: start;
+}
+
+.service-card {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 421 / 561;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--radius-md);
+  background: #0d0f0d;
+  color: var(--c-white);
+}
+
+.service-card__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transition: transform 900ms var(--ease-out);
+}
+
+.service-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.55) 56%, rgba(0, 0, 0, 0.95) 100%);
+}
+
+.service-card__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: transparent;
+}
+
+/* If a photo fails to load, the card's dark background shows instead of a broken image. */
+.service-card__media.is-missing img {
+  visibility: hidden;
+}
+
+/* Photos wipe in as the carousel arrives, the three in view one after another; cards
+   scrolled in later reveal as they arrive. */
+.service-card__media {
+  --stagger: 140ms;
+}
+
+.carousel__slide:nth-child(3n + 2) .service-card__media { --i: 1; }
+.carousel__slide:nth-child(3n) .service-card__media { --i: 2; }
+
+/* A lime edge that lights on hover (above the photo, so an inset shadow won't do). */
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(205, 242, 0, 0);
+  transition: box-shadow 450ms var(--ease-out);
+  pointer-events: none;
+}
+
+.service-card:hover::after,
+.service-card:focus-within::after {
+  box-shadow: inset 0 0 0 1px rgba(205, 242, 0, 0.6);
+}
+
+.service-card__title {
+  transition: transform 450ms var(--ease-expo);
+}
+
+.service-card:hover .service-card__title {
+  transform: translateY(-3px);
+}
+
+.service-card__body {
+  padding: 0 32px 41px 40px;
+}
+
+.service-card__title {
+  max-width: 9.8em;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1rem + 1.2vw, 2.0625rem);
+  font-weight: 500;
+  line-height: 1.48;
+  letter-spacing: -0.03em;
+}
+
+.service-card__text {
+  margin-top: 17px;
+  font-size: 0.97rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.service-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--c-lime);
+}
+
+.service-card__link .icon {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+/* Secondary action: lime text whose underline draws out toward the arrow on hover. */
+.service-card__link {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 450ms var(--ease-expo);
+}
+
+.service-card:hover .service-card__link,
+.service-card:focus-within .service-card__link {
+  background-size: calc(100% - 26px) 1px;
+}
+
+.service-card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.service-card:hover .service-card__media,
+.service-card:focus-within .service-card__media {
+  transform: scale(1.06);
+}
+
+.service-card:hover .service-card__link .icon,
+.service-card:focus-within .service-card__link .icon {
+  transform: translateX(4px);
+}
+
+.service-card__link:focus-visible {
+  outline: none;
+}
+
+.service-card:has(.service-card__link:focus-visible) {
+  outline: 3px solid var(--c-lime);
+  outline-offset: 3px;
+}
+
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 24px;
+  margin-top: 33px;
+}
+
+.carousel__dot {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.carousel__dot::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-grey-300);
+  transition:
+    width var(--dur) var(--ease-out),
+    height var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out);
+}
+
+.carousel__dot[data-dist="1"]::before {
+  width: 13px;
+  height: 13px;
+}
+
+.carousel__dot[aria-current="true"]::before {
+  width: 14px;
+  height: 14px;
+  background: var(--c-black);
+}
+
+.carousel__dot:hover:not([aria-current="true"])::before {
+  background: #b5b5b5;
+}
+
+/* 5. FAQ ------------------------------------------------------------------ */
+.faq {
+  position: relative;
+  z-index: 1;
+  overflow-x: clip; /* keeps the seam light inside the page */
+  padding-block: 112px 130px;
+  background: var(--c-night);
+  color: var(--c-mist);
+}
+
+.faq__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 658px;
+  column-gap: 60px;
+  align-items: start;
+}
+
+.faq__intro {
+  padding-left: 12px;
+}
+
+.faq__title {
+  margin-top: 24px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 0.5rem + 3.6vw, 3.734rem);
+  font-weight: 600;
+  line-height: 1.085;
+  letter-spacing: -0.03em;
+}
+
+.faq__text {
+  max-width: 440px;
+  margin-top: 21px;
+  font-size: 1.15625rem;
+  line-height: 1.68;
+  color: #b4b6a1;
+}
+
+/* "Contact us →": lime, with an underline that draws toward the arrow on hover. */
+.faq__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--c-lime);
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 450ms var(--ease-expo);
+}
+
+.faq__link:hover {
+  background-size: calc(100% - 26px) 1px;
+}
+
+.faq__link .icon {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.faq__link:hover .icon {
+  transform: translateX(4px);
+}
+
+/* The design sets the accordion 12px to the right of the column (676–1334 at 1440). */
+.faq-list {
+  margin: 8px -12px 0 12px;
+  border-top: 1px solid rgba(245, 247, 221, 0.1);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(245, 247, 221, 0.1);
+}
+
+.faq-item__trigger {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding-block: 28.5px;
+  text-align: left;
+  border-radius: var(--radius-xs);
+}
+
+.faq-item__question {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 0.75rem + 1vw, 1.53125rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--c-mist);
+  transition: color var(--dur-fast) linear;
+}
+
+/* Round toggles: a lime plus in a faint ring, becoming a lime disc with a dark cross. */
+.faq-item__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(198, 231, 11, 0.28);
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--c-lime);
+  font-size: 18px;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    transform 400ms var(--ease-expo);
+}
+
+/* The plus turns 45° into a cross as its answer opens, and back as it closes. */
+.faq-item__icon .icon {
+  transition: transform 450ms var(--ease-expo);
+}
+
+.faq-item__trigger:hover .faq-item__icon {
+  border-color: rgba(198, 231, 11, 0.7);
+  box-shadow: 0 0 0 4px rgba(198, 231, 11, 0.08);
+  transform: translateY(-2px);
+}
+
+.faq-item__trigger[aria-expanded="true"] .faq-item__icon {
+  border-color: var(--c-lime);
+  background-color: var(--c-lime);
+  box-shadow: 0 8px 20px -10px rgba(198, 231, 11, 0.6);
+  color: var(--c-night);
+}
+
+.faq-item__trigger:hover .faq-item__question {
+  color: var(--c-white);
+}
+
+.faq-item__trigger[aria-expanded="true"] .faq-item__icon .icon {
+  transform: rotate(45deg);
+}
+
+/* The answer fades and eases down into place as its row opens (height grows first), and
+   fades out ahead of the row closing, so closing is the same motion in reverse. */
+.js .faq-item__inner p {
+  opacity: 0;
+  transform: translate3d(0, -8px, 0);
+  transition:
+    opacity 250ms var(--ease-out),
+    transform 350ms var(--ease-out);
+}
+
+.js .faq-item.is-open .faq-item__inner p {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 450ms var(--ease-out) 120ms,
+    transform 600ms var(--ease-expo) 80ms;
+}
+
+.faq-item__panel {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.js .faq-item__panel {
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows 450ms var(--ease-out),
+    visibility 0s linear 450ms;
+}
+
+.js .faq-item.is-open .faq-item__panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows 450ms var(--ease-out),
+    visibility 0s;
+}
+
+.faq-item__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.faq-item__inner p {
+  max-width: 586px;
+  padding: 0 0 31px;
+  font-size: 1.09375rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #b2b49f;
+}
+
+/* 6. Final CTA ------------------------------------------------------------ */
+.cta {
+  position: relative;
+  isolation: isolate;
+  padding-block: 250px 258px;
+  text-align: center;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0 16px 16px;
+  z-index: -1;
+  border-radius: 64px;
+  background: var(--c-cream);
+  filter: blur(22px);
+}
+
+.cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 0.8rem + 4.5vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.045;
+  letter-spacing: -0.085em;
+  color: var(--c-black);
+}
+
+.cta__line {
+  display: block;
+}
+
+.cta__text {
+  max-width: 800px;
+  margin-top: 25px;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.85rem + 0.4vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--c-olive-ink);
+}
+
+.cta .btn--lg {
+  margin-top: 50px;
+}
+
+/* 7. Motion --------------------------------------------------------------- */
+/* Hero film: settles in from black after the page veil (its poster is the first frame). */
+.hero__video {
+  animation: film-in 1800ms var(--ease-expo) var(--page-delay, 0ms) both;
+}
+
+/* The CTA's soft cream light deepens into view as the section arrives. */
+.js .cta:not(.is-visible)::before {
+  opacity: 0;
+}
+
+.cta.is-visible::before {
+  animation: glow-in 1800ms var(--ease-expo) backwards;
+}
+
+/* The lime corner light breathes slowly while the section is on screen. */
+.process__glow {
+  animation: glow-breathe 9s var(--ease-in-out) infinite alternate paused;
+}
+
+.is-in-view .process__glow {
+  animation-play-state: running;
+}
+
+.hero:not(.is-in-view) .hero__scroll::before {
+  animation-play-state: paused;
+}
+
+/* Scroll-linked depth (desktop): the hero film sinks and eases in as the page moves on,
+   the corner light and dotted guides drift against the scroll. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    .hero__video {
+      animation:
+        film-in 1800ms var(--ease-expo) var(--page-delay, 0ms) both,
+        hero-sink linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 0 100vh;
+    }
+
+    .process__glow {
+      animation:
+        glow-breathe 9s var(--ease-in-out) infinite alternate paused,
+        parallax-shift linear both;
+      animation-timeline: auto, --scope;
+    }
+  }
+}
+
+/* 7b. Keyframes ----------------------------------------------------------- */
+@keyframes film-in {
+  from { opacity: 0; scale: 1.06; }
+}
+
+@keyframes glow-in {
+  from { opacity: 0; transform: scale(0.94); }
+}
+
+@keyframes hero-sink {
+  to { transform: translate3d(0, 110px, 0) scale(1.04); }
+}
+
+@keyframes glow-breathe {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
+
+@keyframes steps-light {
+  0% { background-position: center -180px; }
+  70%, 100% { background-position: center calc(100% + 180px); }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+/* 8. Responsive ----------------------------------------------------------- */
+@media (max-width: 1439px) {
+  .why__intro {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 46%);
+    column-gap: clamp(40px, 6vw, 96px);
+  }
+
+  .why__features {
+    column-gap: clamp(28px, 3.75vw, 54px);
+  }
+
+  .process__grid {
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    column-gap: clamp(40px, 6vw, 100px);
+  }
+
+  .faq__grid {
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    column-gap: clamp(32px, 4vw, 60px);
+  }
+}
+
+@media (max-width: 1199px) {
+  .service-card__body {
+    padding: 0 24px 30px 28px;
+  }
+
+  /* A narrower gutter: the arrows shrink with it rather than reaching over the cards. */
+  .carousel {
+    --arrow-size: 38px;
+  }
+
+  .carousel__arrow .icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 1023px) {
+  main {
+    --home-left: var(--gutter);
+    --home-right: var(--gutter);
+  }
+
+  /* Tablets: the copy ends well above the fold, so the hero no longer stretches to the full
+     880px and leaves a void under the buttons (the ≤767 rule below sizes phones on its own). */
+  .hero {
+    min-height: clamp(600px, 76svh, 760px);
+  }
+
+  .hero__content {
+    padding-top: 150px;
+    padding-bottom: 130px;
+  }
+
+  .hero__title {
+    line-height: 1.02;
+  }
+
+  .why {
+    padding-block: 96px;
+  }
+
+  .why__intro {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
+  }
+
+  .why__title {
+    max-width: 620px;
+  }
+
+  .why__features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 72px;
+  }
+
+  .process {
+    padding-block: 104px 88px;
+  }
+
+  .process__glow {
+    top: -320px;
+    right: -320px;
+  }
+
+  .process__grid {
+    grid-template-columns: 1fr;
+    row-gap: 56px;
+  }
+
+  .process__intro {
+    max-width: 560px;
+  }
+
+  .step {
+    grid-template-columns: 96px minmax(0, 1fr);
+    padding-block: 30px 32px;
+  }
+
+  .step__num {
+    font-size: 3rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+    margin-top: 88px;
+  }
+
+  .carousel__track {
+    grid-auto-columns: calc((100% - 24px) / 2);
+  }
+
+  /* Too narrow for a gutter beside the cards: the arrows join the dots under the track,
+     where they never cover a card's title and sit within thumb reach. */
+  .carousel {
+    --arrow-size: 40px;
+  }
+
+  .carousel__arrow {
+    top: calc(100% + 45px);
+  }
+
+  .carousel__arrow--prev {
+    left: calc(50% - 108px);
+  }
+
+  .carousel__arrow--next {
+    right: calc(50% - 108px);
+  }
+
+  .faq {
+    padding-block: 96px;
+  }
+
+  .faq__grid {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+  }
+
+  .faq__intro {
+    padding-left: 0;
+  }
+
+  .faq__title br {
+    display: none;
+  }
+
+  .faq-item__trigger {
+    padding-block: 26px;
+  }
+
+  .cta {
+    padding-block: 120px 160px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: clamp(600px, 100svh, 780px);
+  }
+
+  .hero__overlay {
+    background:
+      linear-gradient(180deg, var(--c-night) 0px, rgba(11, 15, 8, 0.82) 80px, rgba(11, 15, 8, 0.45) 40%, rgba(11, 15, 8, 0.7) 100%);
+  }
+
+  .hero__video {
+    object-position: 58% center;
+  }
+
+  /* The copy spans the full width on phones: the focus follows it down the frame instead. */
+  .hero__focus {
+    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 14%, #000 34%);
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 14%, #000 34%);
+  }
+
+  .hero__content {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  .hero__badge {
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+  }
+
+  .hero__title {
+    margin-top: 24px;
+    line-height: 1.05;
+  }
+
+  .hero__text {
+    margin-top: 22px;
+    line-height: 1.6;
+  }
+
+  .hero__actions {
+    margin-top: 28px;
+    gap: 12px;
+  }
+
+  .btn--hero {
+    height: 52px;
+    padding-inline: 22px;
+    font-size: 0.9375rem;
+  }
+
+  .hero__scroll {
+    bottom: 44px;
+    font-size: 0.6875rem;
+  }
+
+  .why {
+    padding-block: 72px 80px;
+  }
+
+  .why__title {
+    margin-top: 18px;
+  }
+
+  .why__features {
+    grid-template-columns: 1fr;
+    row-gap: 36px;
+    margin-top: 56px;
+  }
+
+  .feature {
+    padding-top: 26px;
+  }
+
+  .feature__title {
+    font-size: 1.5rem;
+  }
+
+  .feature__text {
+    font-size: 1rem;
+  }
+
+  .process {
+    padding-block: 80px 72px;
+  }
+
+  .process__text {
+    font-size: 1.0625rem;
+  }
+
+  .process__cta {
+    height: 52px;
+    padding-inline: 22px;
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    padding-block: 26px 28px;
+  }
+
+  .step__num {
+    font-size: 2.5rem;
+  }
+
+  .step__title {
+    font-size: 1.3125rem;
+  }
+
+  .step__text {
+    font-size: 1rem;
+  }
+
+  .stats {
+    row-gap: 32px;
+    margin-top: 64px;
+    padding-top: 32px;
+  }
+
+  .stat__label {
+    margin-top: 10px;
+    font-size: 0.6875rem;
+  }
+
+  .services {
+    padding-block: 80px 96px;
+  }
+
+  .carousel {
+    margin-top: 44px;
+  }
+
+  .carousel__track {
+    grid-auto-columns: 86%;
+    gap: 16px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    border-radius: 0;
+  }
+
+  .service-card {
+    aspect-ratio: 4 / 5;
+  }
+
+  /* The shorter card puts the title higher over the photo, so the shade starts earlier. */
+  .service-card__media::after {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0.62) 48%, rgba(0, 0, 0, 0.95) 100%);
+  }
+
+  .service-card__title {
+    line-height: 1.25;
+  }
+
+  .service-card__text {
+    margin-top: 10px;
+    font-size: 0.9375rem;
+  }
+
+  .service-card__link {
+    margin-top: 16px;
+  }
+
+  .faq {
+    padding-block: 72px 80px;
+  }
+
+  .faq__title {
+    margin-top: 18px;
+  }
+
+  .faq__text {
+    font-size: 1.0625rem;
+  }
+
+  .faq-item__trigger {
+    gap: 16px;
+    padding-block: 20px;
+  }
+
+  .faq-item__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .faq-item__inner p {
+    padding-bottom: 24px;
+    font-size: 1rem;
+  }
+
+  .cta {
+    padding-block: 96px 120px;
+  }
+
+  .cta__line {
+    display: inline;
+  }
+
+  .cta .btn--lg {
+    height: 60px;
+    margin-top: 36px;
+    padding-inline: 40px;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .carousel__track {
+    grid-auto-columns: 88%;
+  }
+}
